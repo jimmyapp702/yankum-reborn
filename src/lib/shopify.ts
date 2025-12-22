@@ -2,7 +2,7 @@
 const SHOPIFY_STORE_DOMAIN = 'yankum.myshopify.com';
 const STOREFRONT_ACCESS_TOKEN = '9f8c07158a95823820155aff5f1a7dd9';
 
-const STOREFRONT_API_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`;
+const STOREFRONT_API_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`;
 
 interface ShopifyResponse<T> {
   data: T;
