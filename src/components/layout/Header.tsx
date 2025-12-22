@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
+import { ShoppingCart, Menu } from 'lucide-react';
 import { useState } from 'react';
-import { useCart, useCollections } from '@/hooks/useShopify';
+import { useCart } from '@/hooks/useShopify';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -10,22 +10,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: cartData } = useCart();
-  const { data: collectionsData } = useCollections();
 
-  const collections = collectionsData?.collections.edges.map(e => e.node) || [];
   const cartItemCount = cartData?.cart?.lines.edges.reduce((sum, e) => sum + e.node.quantity, 0) || 0;
 
   return (
@@ -40,71 +29,26 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="gap-1">
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-heading text-sm uppercase tracking-wider bg-transparent">
-                  Shop
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                    <li className="col-span-2">
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/collections"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-heading font-semibold uppercase">All Collections</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            Browse our complete range of recovery gear
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    {collections.slice(0, 6).map((collection) => (
-                      <li key={collection.id}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={`/collections/${collection.handle}`}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">{collection.title}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              
-              <NavigationMenuItem>
-                <Link
-                  to="/products"
-                  className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
-                >
-                  All Products
-                </Link>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link
-                  to="/learn"
-                  className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
-                >
-                  Learn
-                </Link>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
-                >
-                  Our Story
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <nav className="hidden lg:flex items-center gap-1">
+            <Link
+              to="/products"
+              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              All Products
+            </Link>
+            <Link
+              to="/learn"
+              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              Learn
+            </Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              Our Story
+            </Link>
+          </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
@@ -136,21 +80,6 @@ export function Header() {
                   >
                     All Products
                   </Link>
-                  <div className="space-y-2">
-                    <span className="font-heading text-sm uppercase tracking-wider text-muted-foreground">
-                      Collections
-                    </span>
-                    {collections.map((collection) => (
-                      <Link
-                        key={collection.id}
-                        to={`/collections/${collection.handle}`}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block py-2 pl-4 text-foreground/80 hover:text-foreground"
-                      >
-                        {collection.title}
-                      </Link>
-                    ))}
-                  </div>
                   <Link
                     to="/learn"
                     onClick={() => setMobileMenuOpen(false)}
