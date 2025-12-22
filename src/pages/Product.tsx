@@ -17,7 +17,7 @@ function formatPrice(amount: string, currencyCode: string = 'USD') {
 export default function Product() {
   const { handle } = useParams<{ handle: string }>();
   const { data, isLoading } = useProductByHandle(handle || '');
-  const product = data?.product;
+  const product = data?.productByHandle;
   const { toast } = useToast();
   const addToCart = useAddToCart();
   
