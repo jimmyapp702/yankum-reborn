@@ -103,7 +103,7 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function CompactFeaturedProducts() {
-  const { data, isLoading } = useFeaturedProducts(4);
+  const { data, isLoading, error } = useFeaturedProducts(4);
   const products = data?.products.edges.map(e => e.node) || [];
 
   if (isLoading) {
@@ -123,6 +123,22 @@ export function CompactFeaturedProducts() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="section-padding bg-background">
+        <div className="container-wide text-center py-12">
+          <h2 className="font-heading text-2xl font-bold mb-4">Unable to Load Products</h2>
+          <p className="text-muted-foreground mb-2">
+            There was an issue connecting to the Shopify store.
+          </p>
+          <p className="text-sm text-destructive">
+            {error instanceof Error ? error.message : 'Store may be unavailable or subscription inactive.'}
+          </p>
         </div>
       </section>
     );
