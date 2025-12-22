@@ -4,7 +4,7 @@ import { useCollections } from '@/hooks/useShopify';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export function CompactCollections() {
-  const { data, isLoading } = useCollections();
+  const { data, isLoading, error } = useCollections();
   const collections = data?.collections.edges.map(e => e.node).slice(0, 4) || [];
 
   if (isLoading) {
@@ -20,6 +20,22 @@ export function CompactCollections() {
               <Skeleton key={i} className="h-64 rounded-sm" />
             ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="section-padding bg-muted">
+        <div className="container-wide text-center py-12">
+          <h2 className="font-heading text-2xl font-bold mb-4">Unable to Load Collections</h2>
+          <p className="text-muted-foreground mb-2">
+            There was an issue connecting to the Shopify store.
+          </p>
+          <p className="text-sm text-destructive">
+            {error instanceof Error ? error.message : 'Store may be unavailable.'}
+          </p>
         </div>
       </section>
     );

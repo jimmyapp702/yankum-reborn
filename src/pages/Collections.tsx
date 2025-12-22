@@ -5,7 +5,7 @@ import { useCollections } from '@/hooks/useShopify';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Collections() {
-  const { data, isLoading } = useCollections();
+  const { data, isLoading, error } = useCollections();
   const collections = data?.collections.edges.map(e => e.node) || [];
 
   return (
@@ -30,6 +30,23 @@ export default function Collections() {
               {[...Array(6)].map((_, i) => (
                 <Skeleton key={i} className="h-80 rounded-sm" />
               ))}
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <h2 className="font-heading text-2xl font-bold mb-4">Unable to Load Collections</h2>
+              <p className="text-muted-foreground mb-4">
+                There was an issue connecting to the Shopify store.
+              </p>
+              <p className="text-sm text-destructive mb-6">
+                {error instanceof Error ? error.message : 'Store may be unavailable or subscription inactive.'}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Please ensure the Shopify store has an active subscription.
+              </p>
+            </div>
+          ) : collections.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground text-lg">No collections found.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
