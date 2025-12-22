@@ -90,20 +90,13 @@ export function KineticRopesHero() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1533591917954-27ebe5af4679?auto=format&fit=crop&w=2000&q=80"
-          alt="Off-road vehicle recovery"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/70" />
-      </div>
+      {/* Background gradient only */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/95 to-secondary/80" />
 
       <div className="container-wide relative py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <div className="space-y-8">
+          {/* Left: Content */}
+          <div className="space-y-8 order-2 lg:order-1">
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-sm font-heading uppercase tracking-wider">
               <Zap className="h-4 w-4" />
               <span>Kinetic Recovery Ropes</span>
@@ -149,62 +142,82 @@ export function KineticRopesHero() {
                 <span className="text-sm font-medium">Batch Tested</span>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button asChild size="lg" className="btn-primary text-lg px-8 py-6">
+          {/* Right: Hero Image + CTA below */}
+          <div className="space-y-6 order-1 lg:order-2">
+            {/* Main Hero Image */}
+            <div className="relative aspect-[4/3] rounded-sm overflow-hidden shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1533591917954-27ebe5af4679?auto=format&fit=crop&w=1200&q=80"
+                alt="Off-road vehicle recovery with kinetic rope"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent" />
+              
+              {/* USA Badge overlay */}
+              <div className="absolute top-4 right-4 w-16 h-16 bg-primary rounded-full flex flex-col items-center justify-center text-primary-foreground shadow-lg">
+                <span className="text-lg">🇺🇸</span>
+                <span className="text-[10px] font-heading font-bold uppercase">USA Made</span>
+              </div>
+            </div>
+
+            {/* CTAs below image */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" className="btn-primary text-lg px-8 py-6 flex-1">
                 <Link to="/collections/kinetic-ropes">
                   Shop All Ropes
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 border-white/30 text-white hover:bg-white hover:text-secondary">
+              <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 border-white/30 text-white hover:bg-white hover:text-secondary flex-1">
                 <Link to="/learn">
                   Learn How They Work
                 </Link>
               </Button>
             </div>
           </div>
+        </div>
 
-          {/* Featured Products Grid */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="font-heading text-xl font-bold text-white">
-                Featured Kinetic Ropes
-              </h2>
-              <Link 
-                to="/collections/kinetic-ropes"
-                className="text-primary font-heading text-sm uppercase tracking-wider inline-flex items-center gap-2 hover:gap-3 transition-all"
-              >
-                View All
-                <ArrowRight className="h-4 w-4" />
+        {/* Featured Products Section Below */}
+        <div className="mt-16 pt-12 border-t border-white/10">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-heading text-2xl font-bold text-white">
+              Featured Kinetic Ropes
+            </h2>
+            <Link 
+              to="/collections/kinetic-ropes"
+              className="text-primary font-heading text-sm uppercase tracking-wider inline-flex items-center gap-2 hover:gap-3 transition-all"
+            >
+              View All
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="space-y-3">
+                  <Skeleton className="aspect-square rounded-sm bg-white/10" />
+                  <Skeleton className="h-4 w-3/4 bg-white/10" />
+                  <Skeleton className="h-4 w-1/2 bg-white/10" />
+                </div>
+              ))}
+            </div>
+          ) : products.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {products.map((product) => (
+                <HeroProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white/5 rounded-sm p-8 text-center border border-white/10">
+              <p className="text-white/60 mb-4">Browse our kinetic rope collection</p>
+              <Link to="/collections/kinetic-ropes" className="btn-primary inline-flex">
+                Shop Kinetic Ropes
               </Link>
             </div>
-
-            {isLoading ? (
-              <div className="grid grid-cols-2 gap-4">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="space-y-3">
-                    <Skeleton className="aspect-square rounded-sm bg-white/10" />
-                    <Skeleton className="h-4 w-3/4 bg-white/10" />
-                    <Skeleton className="h-4 w-1/2 bg-white/10" />
-                  </div>
-                ))}
-              </div>
-            ) : products.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
-                {products.map((product) => (
-                  <HeroProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white/5 rounded-sm p-8 text-center border border-white/10">
-                <p className="text-white/60 mb-4">Browse our kinetic rope collection</p>
-                <Link to="/collections/kinetic-ropes" className="btn-primary inline-flex">
-                  Shop Kinetic Ropes
-                </Link>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
 
