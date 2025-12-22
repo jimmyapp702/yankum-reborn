@@ -1,5 +1,5 @@
 import { Layout } from '@/components/layout/Layout';
-import { SafetyEducationHero } from '@/components/home/SafetyEducationHero';
+import { KineticRopesHero } from '@/components/home/KineticRopesHero';
 import { KineticRopeScienceSection } from '@/components/home/KineticRopeScienceSection';
 import { SafetyGuidelinesSection } from '@/components/home/SafetyGuidelinesSection';
 import { ProductEducationSection } from '@/components/home/ProductEducationSection';
@@ -13,8 +13,8 @@ import { NewsletterSection } from '@/components/home/NewsletterSection';
 const Index = () => {
   return (
     <Layout>
-      {/* Safety-First Educational Hero */}
-      <SafetyEducationHero />
+      {/* Shoppable Kinetic Ropes Hero */}
+      <KineticRopesHero />
       
       {/* Education: How Kinetic Ropes Work */}
       <KineticRopeScienceSection />
