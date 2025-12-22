@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   ShoppingCart, Shield, Truck, Award, Check, ChevronRight, Minus, Plus,
@@ -22,6 +22,37 @@ function formatPrice(amount: string, currencyCode: string = 'USD') {
     style: 'currency',
     currency: currencyCode,
   }).format(parseFloat(amount));
+}
+
+function ProductDescription({ description }: { description?: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const maxLength = 250;
+  
+  const defaultDescription = `This premium kinetic recovery rope is designed for safe, effective vehicle recovery. 
+Built with double-braided nylon construction, it stretches up to 30% under load to store 
+and release energy smoothly — eliminating the dangerous shock loads that cause tow strap failures.`;
+
+  const text = description || defaultDescription;
+  const isLong = text.length > maxLength;
+  const displayText = expanded || !isLong ? text : text.slice(0, maxLength).trim() + '...';
+
+  return (
+    <div className="bg-background rounded-sm p-8 border border-border">
+      <h2 className="font-heading text-2xl font-bold mb-6">Product Description</h2>
+      <div className="prose prose-lg max-w-none text-muted-foreground">
+        <p className="leading-relaxed whitespace-pre-line">{displayText}</p>
+      </div>
+      {isLong && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="mt-4 text-primary font-heading text-sm uppercase tracking-wider inline-flex items-center gap-2 hover:gap-3 transition-all"
+        >
+          {expanded ? 'Read Less' : 'Read More'}
+          <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+        </button>
+      )}
+    </div>
+  );
 }
 
 function RelatedProductCard({ product }: { product: Product }) {
@@ -389,21 +420,8 @@ export default function Product() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Left Column - Description & Details */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Description */}
-              <div className="bg-background rounded-sm p-8 border border-border">
-                <h2 className="font-heading text-2xl font-bold mb-6">Product Description</h2>
-                {product.description ? (
-                  <div className="prose prose-lg max-w-none text-muted-foreground">
-                    <p className="leading-relaxed">{product.description}</p>
-                  </div>
-                ) : (
-                  <p className="text-muted-foreground">
-                    This premium kinetic recovery rope is designed for safe, effective vehicle recovery. 
-                    Built with double-braided nylon construction, it stretches up to 30% under load to store 
-                    and release energy smoothly — eliminating the dangerous shock loads that cause tow strap failures.
-                  </p>
-                )}
-              </div>
+              {/* Description with Read More */}
+              <ProductDescription description={product.description} />
 
               {/* Features Accordion */}
               <div className="bg-background rounded-sm border border-border overflow-hidden">
@@ -636,9 +654,186 @@ export default function Product() {
         </div>
       </section>
 
+      {/* In-Depth Product Sections */}
+      <section className="py-16 bg-background border-t border-border">
+        <div className="container-wide">
+          {/* How Kinetic Ropes Work */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+              <span className="text-primary font-heading text-sm uppercase tracking-wider mb-4 block">The Science</span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">How Kinetic Recovery Works</h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Unlike static tow straps that create dangerous shock loads, kinetic recovery ropes are designed to 
+                stretch 20-30% under load. This stretch stores energy like a rubber band, then releases it smoothly 
+                to assist in the recovery — reducing stress on both vehicles and recovery points.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span className="font-heading font-bold text-primary">1</span>
+                  </div>
+                  <div>
+                    <span className="font-bold block">Connect & Position</span>
+                    <p className="text-muted-foreground text-sm">Attach to rated recovery points on both vehicles, keeping the rope loose</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span className="font-heading font-bold text-primary">2</span>
+                  </div>
+                  <div>
+                    <span className="font-bold block">Smooth Acceleration</span>
+                    <p className="text-muted-foreground text-sm">Recovery vehicle accelerates smoothly, stretching the rope gradually</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span className="font-heading font-bold text-primary">3</span>
+                  </div>
+                  <div>
+                    <span className="font-bold block">Energy Transfer</span>
+                    <p className="text-muted-foreground text-sm">Stored energy releases smoothly, assisting stuck vehicle without jarring impacts</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-muted rounded-sm p-8 border border-border">
+              <h3 className="font-heading text-xl font-bold mb-6">Kinetic vs. Static Comparison</h3>
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-4 text-sm font-heading uppercase text-muted-foreground border-b border-border pb-3">
+                  <span>Factor</span>
+                  <span className="text-center">Kinetic Rope</span>
+                  <span className="text-center">Tow Strap</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <span className="text-sm">Stretch</span>
+                  <span className="text-center font-bold text-primary">20-30%</span>
+                  <span className="text-center text-muted-foreground">0-5%</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <span className="text-sm">Shock Load</span>
+                  <span className="text-center font-bold text-primary">Minimal</span>
+                  <span className="text-center text-muted-foreground">Severe</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <span className="text-sm">Vehicle Stress</span>
+                  <span className="text-center font-bold text-primary">Low</span>
+                  <span className="text-center text-muted-foreground">High</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <span className="text-sm">Metal Hardware</span>
+                  <span className="text-center font-bold text-primary">None</span>
+                  <span className="text-center text-muted-foreground">Hooks</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4 items-center">
+                  <span className="text-sm">Failure Risk</span>
+                  <span className="text-center font-bold text-primary">Low</span>
+                  <span className="text-center text-muted-foreground">Moderate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* When To Use */}
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <span className="text-primary font-heading text-sm uppercase tracking-wider mb-4 block">Applications</span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold">When To Use This Rope</h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-muted rounded-sm p-6 border border-border">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Zap className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-3">Off-Road Recovery</h3>
+                <p className="text-muted-foreground text-sm">
+                  Perfect for mud, sand, and snow recoveries where a stuck vehicle needs a smooth, 
+                  controlled pull without damaging frame or body.
+                </p>
+              </div>
+              <div className="bg-muted rounded-sm p-6 border border-border">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Truck className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-3">Trail Riding</h3>
+                <p className="text-muted-foreground text-sm">
+                  Essential gear for Jeeps, trucks, and UTVs hitting the trails. Compact enough to 
+                  stow in your vehicle, strong enough for any situation.
+                </p>
+              </div>
+              <div className="bg-muted rounded-sm p-6 border border-border">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-3">Emergency Preparedness</h3>
+                <p className="text-muted-foreground text-sm">
+                  Keep in your vehicle year-round for unexpected situations — winter storms, 
+                  roadside emergencies, or helping others in need.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Care & Maintenance */}
+          <div className="bg-secondary rounded-sm p-8 md:p-12">
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div>
+                <span className="text-primary font-heading text-sm uppercase tracking-wider mb-4 block">Maintenance</span>
+                <h2 className="font-heading text-3xl font-bold mb-6 text-secondary-foreground">Care & Storage Tips</h2>
+                <p className="text-secondary-foreground/70 mb-6">
+                  Proper care extends the life of your kinetic rope and ensures it performs safely for years to come.
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-secondary-foreground">Rinse with fresh water after use in mud, salt, or sand</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-secondary-foreground">Allow to air dry completely before storing</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-secondary-foreground">Store in a cool, dry place away from direct sunlight</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-secondary-foreground">Inspect before each use for cuts, abrasions, or UV damage</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="bg-destructive/10 border border-destructive/20 rounded-sm p-6 mb-6">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-6 w-6 text-destructive flex-shrink-0" />
+                    <div>
+                      <h4 className="font-heading font-bold text-destructive mb-2">When To Replace</h4>
+                      <ul className="text-sm space-y-2 text-destructive/80">
+                        <li>• Visible cuts, fraying, or abraded areas</li>
+                        <li>• Faded color indicating UV degradation</li>
+                        <li>• Stiff or hardened sections</li>
+                        <li>• Eye loops showing wear or looseness</li>
+                        <li>• After any recovery exceeding 80% of rated capacity</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-background/10 rounded-sm p-6">
+                  <h4 className="font-heading font-bold mb-3 text-secondary-foreground">Lifetime Warranty Coverage</h4>
+                  <p className="text-secondary-foreground/70 text-sm">
+                    Our lifetime warranty covers manufacturing defects in materials and workmanship. 
+                    Normal wear, UV damage, or damage from misuse is not covered. Contact us for warranty claims.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="section-padding bg-background">
+        <section className="section-padding bg-muted">
           <div className="container-wide">
             <div className="flex items-center justify-between mb-8">
               <h2 className="font-heading text-2xl md:text-3xl font-bold">
