@@ -5,6 +5,7 @@ import { useCollectionByHandle, useAddToCart } from '@/hooks/useShopify';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Product } from '@/types/shopify';
+import heroRopeImage from '@/assets/hero-kinetic-rope.png';
 
 function formatPrice(amount: string, currencyCode: string = 'USD') {
   return new Intl.NumberFormat('en-US', {
@@ -147,19 +148,12 @@ export function KineticRopesHero() {
           {/* Right: Hero Image + CTA below */}
           <div className="space-y-6 order-1 lg:order-2">
             {/* Main Hero Image */}
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden shadow-2xl">
+            <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1533591917954-27ebe5af4679?auto=format&fit=crop&w=1200&q=80"
-                alt="Off-road vehicle recovery with kinetic rope"
-                className="w-full h-full object-cover"
+                src={heroRopeImage}
+                alt="Yankum Kinetic Recovery Rope - 1 inch x 30 feet"
+                className="w-full h-auto max-w-lg mx-auto"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent" />
-              
-              {/* USA Badge overlay */}
-              <div className="absolute top-4 right-4 w-16 h-16 bg-primary rounded-full flex flex-col items-center justify-center text-primary-foreground shadow-lg">
-                <span className="text-lg">🇺🇸</span>
-                <span className="text-[10px] font-heading font-bold uppercase">USA Made</span>
-              </div>
             </div>
 
             {/* CTAs below image */}
