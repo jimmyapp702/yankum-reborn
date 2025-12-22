@@ -115,7 +115,7 @@ function ProductCard({ product }: { product: Product }) {
 export default function Collection() {
   const { handle } = useParams<{ handle: string }>();
   const { data, isLoading } = useCollectionByHandle(handle || '');
-  const collection = data?.collection;
+  const collection = data?.collectionByHandle;
   const products = collection?.products.edges.map(e => e.node) || [];
 
   if (isLoading) {
