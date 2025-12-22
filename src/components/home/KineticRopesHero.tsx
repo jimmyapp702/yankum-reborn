@@ -157,16 +157,17 @@ export function KineticRopesHero() {
             </div>
 
             {/* CTAs below image */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="btn-primary text-lg px-8 py-6 flex-1">
-                <Link to="/collections/kinetic-ropes">
-                  Shop All Ropes
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-heading text-lg px-8 py-6">
+                <Link to="/products">
+                  Shop Kinetic Ropes
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 border-white/30 text-white hover:bg-white hover:text-secondary flex-1">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-heading text-lg px-8 py-6">
                 <Link to="/learn">
-                  Learn How They Work
+                  Learn More
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>
