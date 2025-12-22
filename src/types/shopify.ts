@@ -21,7 +21,11 @@ export interface ProductVariant {
   id: string;
   title: string;
   availableForSale: boolean;
-  quantityAvailable: number | null;
+  /**
+   * Requires the Storefront API scope `unauthenticated_read_product_inventory`.
+   * If the token doesn't include that scope, this field won't be fetched.
+   */
+  quantityAvailable?: number | null;
   price: Money;
   compareAtPrice: Money | null;
   selectedOptions: SelectedOption[];
