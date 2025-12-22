@@ -17,7 +17,7 @@ export function Footer() {
               <img 
                 src={yankumLogo} 
                 alt="Yankum Ropes" 
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="text-secondary-foreground/70 text-sm leading-relaxed">
