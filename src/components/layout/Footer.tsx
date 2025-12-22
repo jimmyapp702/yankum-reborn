@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail } from 'lucide-react';
 import { useCollections } from '@/hooks/useShopify';
+import yankumLogo from '@/assets/yankum-logo.png';
 
 export function Footer() {
   const { data: collectionsData } = useCollections();
@@ -13,7 +14,11 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-6">
             <Link to="/" className="inline-block">
-              <span className="font-heading text-3xl font-bold tracking-wider">YANKUM</span>
+              <img 
+                src={yankumLogo} 
+                alt="Yankum Ropes" 
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-secondary-foreground/70 text-sm leading-relaxed">
               American-made recovery gear built for those who demand the best. 

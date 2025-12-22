@@ -10,6 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import yankumLogo from '@/assets/yankum-logo.png';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,9 +24,11 @@ export function Header() {
         <div className="flex h-16 md:h-20 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="font-heading text-2xl md:text-3xl font-bold tracking-wider text-foreground">
-              YANKUM
-            </span>
+            <img 
+              src={yankumLogo} 
+              alt="Yankum Ropes" 
+              className="h-8 md:h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
