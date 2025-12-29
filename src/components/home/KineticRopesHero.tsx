@@ -6,57 +6,49 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Product } from '@/types/shopify';
 import heroRopeImage from '@/assets/hero-kinetic-rope.png';
-
 function formatPrice(amount: string, currencyCode: string = 'USD') {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: currencyCode,
+    currency: currencyCode
   }).format(parseFloat(amount));
 }
-
-function HeroProductCard({ product }: { product: Product }) {
-  const { toast } = useToast();
+function HeroProductCard({
+  product
+}: {
+  product: Product;
+}) {
+  const {
+    toast
+  } = useToast();
   const addToCart = useAddToCart();
   const firstVariant = product.variants.edges[0]?.node;
-
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (!firstVariant) return;
-    
     try {
       await addToCart.mutateAsync({
         merchandiseId: firstVariant.id,
-        quantity: 1,
+        quantity: 1
       });
       toast({
         title: 'Added to cart',
-        description: `${product.title} has been added to your cart.`,
+        description: `${product.title} has been added to your cart.`
       });
     } catch (error) {
       toast({
         title: 'Error',
         description: 'Failed to add item to cart.',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     }
   };
-
-  return (
-    <div className="group bg-white/10 backdrop-blur-sm rounded-sm overflow-hidden border border-white/20 hover:border-primary/50 transition-all">
+  return <div className="group bg-white/10 backdrop-blur-sm rounded-sm overflow-hidden border border-white/20 hover:border-primary/50 transition-all">
       <Link to={`/products/${product.handle}`} className="block">
         <div className="relative aspect-square overflow-hidden">
-          {product.featuredImage ? (
-            <img
-              src={product.featuredImage.url}
-              alt={product.featuredImage.altText || product.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full bg-secondary flex items-center justify-center">
+          {product.featuredImage ? <img src={product.featuredImage.url} alt={product.featuredImage.altText || product.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" /> : <div className="w-full h-full bg-secondary flex items-center justify-center">
               <span className="text-muted-foreground">No image</span>
-            </div>
-          )}
+            </div>}
         </div>
       </Link>
       <div className="p-4">
@@ -69,28 +61,21 @@ function HeroProductCard({ product }: { product: Product }) {
           <span className="font-heading text-lg font-bold text-white">
             {formatPrice(product.priceRange.minVariantPrice.amount)}
           </span>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="h-8 px-3"
-            onClick={handleAddToCart}
-            disabled={!product.availableForSale}
-          >
+          <Button size="sm" variant="secondary" className="h-8 px-3" onClick={handleAddToCart} disabled={!product.availableForSale}>
             <ShoppingCart className="h-4 w-4" />
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
-
 export function KineticRopesHero() {
-  const { data, isLoading } = useCollectionByHandle('kinetic-ropes', 4);
+  const {
+    data,
+    isLoading
+  } = useCollectionByHandle('kinetic-ropes', 4);
   const collection = data?.collectionByHandle;
   const products = collection?.products?.edges.map(e => e.node) || [];
-
-  return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary">
+  return <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary">
       {/* Background gradient only */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/95 to-secondary/80" />
 
@@ -149,11 +134,7 @@ export function KineticRopesHero() {
           <div className="space-y-6 order-1 lg:order-2">
             {/* Main Hero Image */}
             <div className="relative">
-              <img
-                src={heroRopeImage}
-                alt="Yankum Kinetic Recovery Rope - 1 inch x 30 feet"
-                className="w-full h-auto max-w-lg mx-auto"
-              />
+              <img src={heroRopeImage} alt="Yankum Kinetic Recovery Rope - 1 inch x 30 feet" className="w-full h-auto max-w-lg mx-auto" />
             </div>
 
             {/* CTAs below image */}
@@ -175,49 +156,10 @@ export function KineticRopesHero() {
         </div>
 
         {/* Featured Products Section Below */}
-        <div className="mt-16 pt-12 border-t border-white/10">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-2xl font-bold text-white">
-              Featured Kinetic Ropes
-            </h2>
-            <Link 
-              to="/collections/kinetic-ropes"
-              className="text-primary font-heading text-sm uppercase tracking-wider inline-flex items-center gap-2 hover:gap-3 transition-all"
-            >
-              View All
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {isLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="space-y-3">
-                  <Skeleton className="aspect-square rounded-sm bg-white/10" />
-                  <Skeleton className="h-4 w-3/4 bg-white/10" />
-                  <Skeleton className="h-4 w-1/2 bg-white/10" />
-                </div>
-              ))}
-            </div>
-          ) : products.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {products.map((product) => (
-                <HeroProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white/5 rounded-sm p-8 text-center border border-white/10">
-              <p className="text-white/60 mb-4">Browse our kinetic rope collection</p>
-              <Link to="/collections/kinetic-ropes" className="btn-primary inline-flex">
-                Shop Kinetic Ropes
-              </Link>
-            </div>
-          )}
-        </div>
+        
       </div>
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-    </section>
-  );
+    </section>;
 }
