@@ -27,9 +27,9 @@ export default function Giveaway() {
       <Layout>
         <GiveawayHero />
         <CountdownTimer />
-        <PrizeShowcase />
         <FeaturedMultiplierCollection />
         <HowToEnter />
+        <PrizeShowcase />
         <GiveawayTestimonials />
         <GiveawayEntryForm />
         <GiveawayRules />

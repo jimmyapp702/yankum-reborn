@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -22,99 +22,58 @@ export function GiveawayHero() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-secondary">
-      {/* Geometric background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-full h-full" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
+    <section className="relative min-h-[90vh] flex items-center bg-secondary overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=2000&q=80"
+          alt="Off-road vehicle"
+          className="w-full h-full object-cover opacity-40"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary/70" />
       </div>
       
-      {/* Diagonal accent */}
-      <div className="absolute -right-32 top-0 w-96 h-full bg-primary/20 transform skew-x-12" />
-      
-      <div className="relative container-wide py-16 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left content */}
-          <div className="space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-sm font-heading font-bold uppercase tracking-wider">
-              <Zap className="w-4 h-4" />
-              <span>Limited Time Giveaway</span>
-            </div>
-            
-            {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-secondary-foreground leading-[0.95] tracking-tight">
-                WIN THIS
-                <br />
-                <span className="text-primary">VEHICLE</span>
-              </h1>
-              <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-md leading-relaxed">
-                Enter now for your chance to win a fully-built, trail-ready rig worth over $75,000. No purchase necessary.
-              </p>
-            </div>
-            
-            {/* Entry form */}
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground placeholder:text-secondary-foreground/50 text-base"
-                />
-                <Button 
-                  type="submit" 
-                  disabled={isLoading}
-                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold uppercase tracking-wider whitespace-nowrap"
-                >
-                  {isLoading ? 'Entering...' : 'Enter Now'}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </div>
-              <p className="text-secondary-foreground/50 text-sm">
-                Get 100 free entries instantly. No purchase necessary.
-              </p>
-            </form>
-            
-            {/* Stats row */}
-            <div className="flex flex-wrap gap-8 pt-4">
-              <div className="space-y-1">
-                <p className="text-3xl md:text-4xl font-heading font-bold text-primary">$75K+</p>
-                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Prize Value</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-3xl md:text-4xl font-heading font-bold text-secondary-foreground">100</p>
-                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Free Entries</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-3xl md:text-4xl font-heading font-bold text-secondary-foreground">1</p>
-                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Grand Prize</p>
-              </div>
-            </div>
-          </div>
+      <div className="relative container-wide py-20">
+        <div className="max-w-2xl">
+          {/* Prize value */}
+          <p className="text-primary font-heading font-bold text-lg tracking-wider mb-4">
+            $75,000+ VALUE
+          </p>
           
-          {/* Right visual - Vehicle image */}
-          <div className="relative hidden lg:block">
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80"
-                alt="Off-road vehicle prize"
-                className="w-full h-full object-cover"
+          {/* Headline */}
+          <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-secondary-foreground leading-[0.9] mb-6">
+            WIN A FULLY-BUILT
+            <br />
+            <span className="text-primary">OFF-ROAD RIG</span>
+          </h1>
+          
+          <p className="text-secondary-foreground/70 text-xl max-w-lg mb-10">
+            Enter for free. Shop to earn more entries. Every $1 = 1 entry.
+          </p>
+          
+          {/* Entry form */}
+          <form onSubmit={handleSubmit} className="max-w-md mb-8">
+            <div className="flex gap-2">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-14 bg-secondary-foreground text-foreground border-0 placeholder:text-muted-foreground"
               />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
-              {/* Value badge */}
-              <div className="absolute bottom-6 left-6 bg-primary text-primary-foreground px-6 py-3">
-                <p className="text-sm font-heading uppercase tracking-wider">Valued At</p>
-                <p className="text-3xl font-heading font-bold">$75,000+</p>
-              </div>
+              <Button 
+                type="submit" 
+                disabled={isLoading}
+                className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold"
+              >
+                {isLoading ? '...' : 'Enter'}
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
             </div>
-          </div>
+            <p className="text-secondary-foreground/50 text-sm mt-3">
+              100 free entries on signup. No purchase necessary.
+            </p>
+          </form>
         </div>
       </div>
     </section>
