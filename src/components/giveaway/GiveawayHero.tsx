@@ -1,155 +1,125 @@
 import { useState } from 'react';
+import { ArrowRight, Gift, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
-import { Shield, Lock, ArrowRight } from 'lucide-react';
-import yankumLogo from '@/assets/yankum-logo.png';
+import { toast } from 'sonner';
 
 export function GiveawayHero() {
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-
-    setIsSubmitting(true);
+    if (!email) {
+      toast.error('Please enter your email');
+      return;
+    }
+    setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    
-    toast({
-      title: "You're entered!",
-      description: "Check your email for confirmation. Good luck!"
-    });
-    
+    toast.success("You're in! Check your email for confirmation.");
     setEmail('');
-    setPhone('');
+    setIsLoading(false);
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Scrolling Marquee */}
-      <div className="absolute top-0 left-0 right-0 bg-primary py-2.5 z-20 overflow-hidden">
-        <div className="animate-marquee whitespace-nowrap flex">
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className="mx-8 text-primary-foreground font-heading font-bold text-sm uppercase tracking-wider">
-              20X ENTRIES SITE WIDE • WIN BIG WITH YANKUM ROPES • LIMITED TIME •
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1533591917954-27ebe5af4679?auto=format&fit=crop&w=2000&q=80"
-          alt="Off-road vehicle recovery"
-          className="h-full w-full object-cover"
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-secondary">
+      {/* Geometric background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-full h-full" 
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
-
-      {/* Content */}
-      <div className="relative z-10 container-wide pt-20 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Main content */}
-          <div className="text-white">
-            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-white px-4 py-2 rounded-sm text-sm font-medium mb-8">
-              <span className="text-lg">🎁</span>
-              <span>Ultimate Recovery Kit Giveaway</span>
+      
+      {/* Diagonal accent */}
+      <div className="absolute -right-32 top-0 w-96 h-full bg-primary/20 transform skew-x-12" />
+      
+      <div className="relative container-wide py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left content */}
+          <div className="space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-sm font-heading font-bold uppercase tracking-wider">
+              <Zap className="w-4 h-4" />
+              <span>Limited Time Giveaway</span>
             </div>
             
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold leading-[0.9] tracking-tight text-shadow mb-6">
-              WIN<br />
-              <span className="text-primary">THIS</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/90 max-w-lg leading-relaxed mb-8">
-              Enter now for your chance to win our complete premium recovery bundle 
-              worth over <span className="text-primary font-semibold">$2,500</span> in gear!
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <Button 
-                size="lg" 
-                className="btn-primary text-lg px-8 py-6"
-                onClick={() => document.getElementById('entry-form')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Enter Giveaway
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white hover:text-foreground"
-                onClick={() => document.getElementById('prizes')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                See Prizes
-              </Button>
+            {/* Headline */}
+            <div className="space-y-4">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-secondary-foreground leading-[0.95] tracking-tight">
+                WIN THE
+                <br />
+                <span className="text-primary">ULTIMATE</span>
+                <br />
+                RECOVERY KIT
+              </h1>
+              <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-md leading-relaxed">
+                Over $2,500 in premium Yankum Ropes gear. Enter now for your chance to win.
+              </p>
             </div>
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-6 pt-8 text-white/80">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Lock className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-medium">Secure Entry</span>
+            
+            {/* Entry form */}
+            <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-14 bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground placeholder:text-secondary-foreground/50 text-base"
+                />
+                <Button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold uppercase tracking-wider whitespace-nowrap"
+                >
+                  {isLoading ? 'Entering...' : 'Enter Now'}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Shield className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-medium">Verified Giveaway</span>
+              <p className="text-secondary-foreground/50 text-sm">
+                Get 100 free entries instantly. No purchase necessary.
+              </p>
+            </form>
+            
+            {/* Stats row */}
+            <div className="flex flex-wrap gap-8 pt-4">
+              <div className="space-y-1">
+                <p className="text-3xl md:text-4xl font-heading font-bold text-primary">$2,500+</p>
+                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Prize Value</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-3xl md:text-4xl font-heading font-bold text-secondary-foreground">100</p>
+                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Free Entries</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-3xl md:text-4xl font-heading font-bold text-secondary-foreground">1</p>
+                <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Grand Prize</p>
               </div>
             </div>
           </div>
-
-          {/* Right side - Entry Form */}
-          <div id="entry-form" className="bg-background/95 backdrop-blur-sm p-8 md:p-10 rounded-sm shadow-xl">
-            <div className="text-center mb-8">
-              <span className="text-primary font-heading font-semibold uppercase tracking-wider text-sm">
-                Get Started
-              </span>
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mt-2">
-                100 FREE ENTRIES
-              </h3>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-12 text-base"
-                required
-              />
+          
+          {/* Right visual */}
+          <div className="relative hidden lg:block">
+            <div className="relative aspect-square">
+              {/* Background circle */}
+              <div className="absolute inset-8 bg-primary/10 rounded-full" />
               
-              <Input
-                type="tel"
-                placeholder="Phone Number (Optional)"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="h-12 text-base"
-              />
-
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn-primary text-lg h-14"
-              >
-                {isSubmitting ? 'Processing...' : 'Get Entered'}
-              </Button>
-
-              <p className="text-xs text-muted-foreground leading-relaxed text-center pt-2">
-                By submitting, you consent to receive marketing from Yankum Ropes LLC. 
-                Msg & data rates may apply. Unsubscribe anytime.
-              </p>
-            </form>
+              {/* Gift box visual */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative">
+                  <div className="w-64 h-64 bg-gradient-to-br from-primary to-primary/80 rounded-sm transform rotate-12 shadow-2xl flex items-center justify-center">
+                    <Gift className="w-32 h-32 text-primary-foreground" />
+                  </div>
+                  {/* Floating elements */}
+                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-secondary-foreground rounded-sm flex items-center justify-center shadow-lg animate-pulse">
+                    <span className="text-2xl font-heading font-bold text-secondary">?</span>
+                  </div>
+                  <div className="absolute -bottom-4 -left-8 w-20 h-20 bg-primary/20 rounded-full" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

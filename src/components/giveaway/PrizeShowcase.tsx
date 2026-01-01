@@ -1,102 +1,106 @@
-import { Gift, Truck, Shield, Wrench } from 'lucide-react';
-import heroRope from '@/assets/hero-kinetic-rope.png';
+import { Check, Star } from 'lucide-react';
+import heroRopeImage from '@/assets/hero-kinetic-rope.png';
 
 const prizes = [
   {
-    name: 'Premium Kinetic Recovery Rope',
-    description: '1" x 30\' with 52,300 lbs breaking strength',
-    value: '$299',
-    image: heroRope,
+    name: '1" Kinetic Recovery Rope',
+    value: '$329',
+    specs: '30ft length, 33,500 lb MBS',
+    featured: true,
   },
   {
-    name: 'Soft Shackle Set (4-Pack)',
-    description: 'UHMWPE construction, lightweight & safe',
+    name: 'Soft Shackle Set',
+    value: '$189',
+    specs: 'Pair of 7/16" synthetic shackles',
+    featured: false,
+  },
+  {
+    name: 'Recovery Damper Bag',
+    value: '$79',
+    specs: 'Weighted line damper for safety',
+    featured: false,
+  },
+  {
+    name: 'Premium Gear Bag',
     value: '$149',
-    image: 'https://images.unsplash.com/photo-1609668528780-e364738d8c4b?auto=format&fit=crop&w=400&q=80',
+    specs: 'Heavy-duty storage solution',
+    featured: false,
   },
   {
-    name: 'Tree Saver Strap',
-    description: '3" x 8\' heavy-duty tree protector',
+    name: 'D-Ring Shackles',
     value: '$89',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
+    specs: 'Pair of 3/4" steel shackles',
+    featured: false,
   },
   {
-    name: 'Recovery Damper',
-    description: 'Weighted line dampener for safety',
+    name: 'Recovery Gloves',
     value: '$49',
-    image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=400&q=80',
+    specs: 'Heavy-duty leather work gloves',
+    featured: false,
   },
-];
-
-const features = [
-  { icon: Gift, text: 'Total Value Over $2,500' },
-  { icon: Truck, text: 'Free Shipping Included' },
-  { icon: Shield, text: 'Lifetime Warranty' },
-  { icon: Wrench, text: 'Complete Kit Ready' },
 ];
 
 export function PrizeShowcase() {
   return (
-    <section id="prizes" className="section-padding bg-background">
+    <section className="section-padding bg-muted">
       <div className="container-wide">
-        <div className="text-center mb-12">
-          <span className="text-primary font-heading font-semibold uppercase tracking-wider text-sm">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <span className="inline-block text-sm font-heading font-semibold uppercase tracking-widest text-primary mb-4">
             What You Could Win
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mt-2 mb-4">
-            THE ULTIMATE<br className="hidden sm:block" /> RECOVERY BUNDLE
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground">
+            THE PRIZE PACKAGE
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Professional-grade recovery gear trusted by off-road enthusiasts worldwide.
-          </p>
         </div>
-
-        {/* Feature badges */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
-          {features.map((feature) => (
-            <div 
-              key={feature.text} 
-              className="flex items-center gap-2 bg-muted px-4 py-2 rounded-sm"
-            >
-              <feature.icon className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-foreground">{feature.text}</span>
+        
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Featured image */}
+          <div className="relative">
+            <div className="aspect-square bg-background rounded-sm p-8 flex items-center justify-center">
+              <img 
+                src={heroRopeImage}
+                alt="Yankum Kinetic Recovery Rope"
+                className="w-full h-full object-contain"
+              />
             </div>
-          ))}
-        </div>
-
-        {/* Prize grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {prizes.map((prize) => (
-            <div 
-              key={prize.name}
-              className="group bg-muted rounded-sm overflow-hidden hover:shadow-lg transition-all duration-300"
-            >
-              <div className="aspect-square relative overflow-hidden bg-background">
-                <img
-                  src={prize.image}
-                  alt={prize.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-sm font-heading font-bold text-sm">
-                  {prize.value}
+            {/* Value badge */}
+            <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-6 py-3">
+              <p className="text-sm font-heading uppercase tracking-wider">Total Value</p>
+              <p className="text-2xl font-heading font-bold">$2,500+</p>
+            </div>
+          </div>
+          
+          {/* Right: Prize list */}
+          <div className="space-y-4">
+            {prizes.map((prize, index) => (
+              <div 
+                key={index}
+                className={`flex items-center gap-4 p-5 bg-background border transition-all duration-200 hover:border-primary/50 ${
+                  prize.featured ? 'border-primary' : 'border-border'
+                }`}
+              >
+                <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 ${
+                  prize.featured ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
+                }`}>
+                  {prize.featured ? (
+                    <Star className="w-5 h-5" />
+                  ) : (
+                    <Check className="w-5 h-5" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-heading font-bold text-foreground">
+                    {prize.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">{prize.specs}</p>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <span className="font-heading font-bold text-lg text-primary">{prize.value}</span>
                 </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-heading font-bold text-foreground mb-1">
-                  {prize.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {prize.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Total value banner */}
-        <div className="mt-12 bg-secondary text-secondary-foreground rounded-sm p-8 md:p-12 text-center">
-          <p className="text-lg font-semibold mb-2 uppercase tracking-wider">Total Prize Value</p>
-          <p className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold">$2,500+</p>
+            ))}
+          </div>
         </div>
       </div>
     </section>
