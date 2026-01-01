@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, Lock, ChevronRight } from 'lucide-react';
+import { Shield, Lock, ArrowRight } from 'lucide-react';
 import yankumLogo from '@/assets/yankum-logo.png';
 
 export function GiveawayHero() {
@@ -29,97 +29,103 @@ export function GiveawayHero() {
   };
 
   return (
-    <section className="relative min-h-screen bg-yankum-black overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Scrolling Marquee */}
-      <div className="absolute top-0 left-0 right-0 bg-primary py-3 z-20 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 bg-primary py-2.5 z-20 overflow-hidden">
         <div className="animate-marquee whitespace-nowrap flex">
           {[...Array(10)].map((_, i) => (
-            <span key={i} className="mx-8 text-primary-foreground font-heading font-bold text-sm uppercase tracking-[0.2em]">
+            <span key={i} className="mx-8 text-primary-foreground font-heading font-bold text-sm uppercase tracking-wider">
               20X ENTRIES SITE WIDE • WIN BIG WITH YANKUM ROPES • LIMITED TIME •
             </span>
           ))}
         </div>
       </div>
 
-      {/* Industrial texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-      }} />
-
-      {/* Diagonal accent lines */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-px h-[60%] bg-gradient-to-t from-primary/30 to-transparent ml-[10%]" />
-        <div className="absolute bottom-0 left-0 w-px h-[40%] bg-gradient-to-t from-yankum-steel/30 to-transparent ml-[15%]" />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1533591917954-27ebe5af4679?auto=format&fit=crop&w=2000&q=80"
+          alt="Off-road vehicle recovery"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-wide min-h-screen flex items-center pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
+      <div className="relative z-10 container-wide pt-20 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Main content */}
-          <div className="text-primary-foreground">
-            <img src={yankumLogo} alt="Yankum Ropes" className="h-10 mb-10 brightness-0 invert opacity-80" />
+          <div className="text-white">
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-white px-4 py-2 rounded-sm text-sm font-medium mb-8">
+              <span className="text-lg">🎁</span>
+              <span>Ultimate Recovery Kit Giveaway</span>
+            </div>
             
-            <p className="text-primary font-heading font-semibold uppercase tracking-[0.3em] text-sm mb-4">
-              Ultimate Recovery Kit
-            </p>
-            
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold leading-[0.9] mb-6 tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold leading-[0.9] tracking-tight text-shadow mb-6">
               WIN<br />
               <span className="text-primary">THIS</span>
             </h1>
             
-            <div className="w-20 h-1 bg-primary mb-8" />
-            
-            <p className="text-lg text-primary-foreground/60 mb-10 max-w-md leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/90 max-w-lg leading-relaxed mb-8">
               Enter now for your chance to win our complete premium recovery bundle 
-              worth over <span className="text-primary font-semibold">$2,500</span> in professional-grade gear.
+              worth over <span className="text-primary font-semibold">$2,500</span> in gear!
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold uppercase tracking-[0.15em] text-base px-10 py-7 rounded-none transition-all duration-300 hover:translate-x-1"
+                className="btn-primary text-lg px-8 py-6"
                 onClick={() => document.getElementById('entry-form')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Enter Giveaway
-                <ChevronRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-2 border-yankum-steel text-primary-foreground bg-transparent hover:bg-yankum-steel/20 font-heading font-semibold uppercase tracking-[0.15em] rounded-none px-8 py-7"
+                className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white hover:text-foreground"
                 onClick={() => document.getElementById('prizes')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 See Prizes
               </Button>
             </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center gap-6 pt-8 text-white/80">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                  <Lock className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-medium">Secure Entry</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                  <Shield className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-medium">Verified Giveaway</span>
+              </div>
+            </div>
           </div>
 
           {/* Right side - Entry Form */}
-          <div id="entry-form" className="bg-yankum-charcoal/80 backdrop-blur-sm p-10 border border-yankum-steel/20 relative">
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-primary" />
-            <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-primary" />
-            <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-primary" />
-            <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-primary" />
-
+          <div id="entry-form" className="bg-background/95 backdrop-blur-sm p-8 md:p-10 rounded-sm shadow-xl">
             <div className="text-center mb-8">
-              <p className="text-primary font-heading font-semibold uppercase tracking-[0.2em] text-sm mb-3">
+              <span className="text-primary font-heading font-semibold uppercase tracking-wider text-sm">
                 Get Started
-              </p>
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary-foreground tracking-tight">
+              </span>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mt-2">
                 100 FREE ENTRIES
               </h3>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <Input
                 type="email"
                 placeholder="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-yankum-black border-yankum-steel/30 text-primary-foreground h-14 text-base rounded-none placeholder:text-yankum-steel focus:border-primary transition-colors"
+                className="h-12 text-base"
                 required
               />
               
@@ -128,30 +134,18 @@ export function GiveawayHero() {
                 placeholder="Phone Number (Optional)"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="bg-yankum-black border-yankum-steel/30 text-primary-foreground h-14 text-base rounded-none placeholder:text-yankum-steel focus:border-primary transition-colors"
+                className="h-12 text-base"
               />
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold uppercase tracking-[0.2em] text-base h-16 rounded-none transition-all duration-300"
+                className="w-full btn-primary text-lg h-14"
               >
                 {isSubmitting ? 'Processing...' : 'Get Entered'}
               </Button>
 
-              {/* Trust indicators */}
-              <div className="flex items-center justify-center gap-6 pt-4">
-                <div className="flex items-center gap-2 text-yankum-steel text-xs uppercase tracking-wider">
-                  <Lock className="w-3.5 h-3.5" />
-                  <span>Secure Entry</span>
-                </div>
-                <div className="flex items-center gap-2 text-yankum-steel text-xs uppercase tracking-wider">
-                  <Shield className="w-3.5 h-3.5" />
-                  <span>Verified</span>
-                </div>
-              </div>
-
-              <p className="text-xs text-yankum-steel leading-relaxed text-center pt-2">
+              <p className="text-xs text-muted-foreground leading-relaxed text-center pt-2">
                 By submitting, you consent to receive marketing from Yankum Ropes LLC. 
                 Msg & data rates may apply. Unsubscribe anytime.
               </p>
