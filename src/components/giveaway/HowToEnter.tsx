@@ -19,8 +19,8 @@ const steps = [
     number: '03',
     icon: ShoppingCart,
     title: 'Shop & Earn',
-    description: 'Every $1 spent = 20 additional entries.',
-    entries: '20x',
+    description: 'Every $1 spent = 1 entry. Featured products earn 20X!',
+    entries: '1:1',
   },
   {
     number: '04',
@@ -44,7 +44,7 @@ export function HowToEnter() {
             HOW TO ENTER
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Multiple ways to enter means more chances to win the ultimate recovery kit.
+            Multiple ways to enter means more chances to win.
           </p>
         </div>
 
