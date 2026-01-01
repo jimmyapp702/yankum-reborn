@@ -1,38 +1,36 @@
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight } from 'lucide-react';
-import { useCollectionByHandle } from '@/hooks/useShopify';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { useProducts } from '@/hooks/useShopify';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 
-const MULTIPLIER = 20;
-const FEATURED_COLLECTION_HANDLE = 'kinetic-recovery-ropes';
-
-export function FeaturedMultiplierCollection() {
-  const { data, isLoading } = useCollectionByHandle(FEATURED_COLLECTION_HANDLE, 4);
-  const products = data?.collectionByHandle?.products?.edges || [];
+export function AllProductsSection() {
+  const { data, isLoading } = useProducts(8);
+  const products = data?.products?.edges || [];
 
   return (
-    <section className="py-20 bg-secondary">
+    <section className="py-20 bg-background">
       <div className="container-wide">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span className="font-heading font-bold text-sm uppercase tracking-wider">
-              {MULTIPLIER}X Entries
+          <div className="inline-flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-full mb-4">
+            <ShoppingBag className="w-4 h-4" />
+            <span className="font-heading font-semibold text-sm uppercase tracking-wider">
+              $1 = 1 Entry
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-secondary-foreground mb-3">
-            Featured Products
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-foreground mb-3">
+            All Products
           </h2>
-          <p className="text-secondary-foreground/70 max-w-lg mx-auto">
-            These products earn {MULTIPLIER}X the entries. Limited time only.
+          <p className="text-muted-foreground max-w-lg mx-auto">
+            Every dollar you spend earns you one entry into the giveaway.
           </p>
         </div>
 
         {/* Products grid */}
         {isLoading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <div key={i} className="space-y-4">
                 <Skeleton className="aspect-square w-full" />
                 <Skeleton className="h-5 w-3/4" />
@@ -44,13 +42,13 @@ export function FeaturedMultiplierCollection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map(({ node: product }) => {
               const price = parseFloat(product.priceRange.minVariantPrice.amount);
-              const entries = Math.floor(price) * MULTIPLIER;
+              const entries = Math.floor(price);
               
               return (
                 <Link 
                   key={product.id}
                   to={`/product/${product.handle}`}
-                  className="group bg-background rounded-lg overflow-hidden"
+                  className="group bg-muted rounded-lg overflow-hidden"
                 >
                   <div className="relative aspect-square bg-muted overflow-hidden">
                     {product.featuredImage ? (
@@ -64,11 +62,8 @@ export function FeaturedMultiplierCollection() {
                         No Image
                       </div>
                     )}
-                    <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-heading font-bold">
-                      {MULTIPLIER}X
-                    </div>
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 bg-background">
                     <h3 className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
                       {product.title}
                     </h3>
@@ -76,7 +71,7 @@ export function FeaturedMultiplierCollection() {
                       <span className="text-muted-foreground">
                         ${price.toFixed(2)}
                       </span>
-                      <span className="text-primary font-heading font-bold text-sm">
+                      <span className="text-foreground font-heading font-semibold text-sm">
                         {entries.toLocaleString()} entries
                       </span>
                     </div>
@@ -89,13 +84,12 @@ export function FeaturedMultiplierCollection() {
 
         {/* View all link */}
         <div className="text-center mt-10">
-          <Link 
-            to={`/collection/${FEATURED_COLLECTION_HANDLE}`}
-            className="inline-flex items-center gap-2 text-primary font-heading font-semibold hover:underline"
-          >
-            View All Featured Products
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <Button asChild variant="outline" size="lg">
+            <Link to="/products" className="inline-flex items-center gap-2">
+              Shop All Products
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
