@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useProducts } from '@/hooks/useShopify';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
@@ -12,34 +12,36 @@ export function AllProductsSection() {
     <section className="py-20 bg-background">
       <div className="container-wide">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-full mb-4">
-            <ShoppingBag className="w-4 h-4" />
-            <span className="font-heading font-semibold text-sm uppercase tracking-wider">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-muted text-muted-foreground px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wider mb-3">
               $1 = 1 Entry
-            </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+              All Products
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-foreground mb-3">
-            All Products
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
-            Every dollar you spend earns you one entry into the giveaway.
-          </p>
+          <Link 
+            to="/products"
+            className="inline-flex items-center gap-1 text-foreground text-sm font-heading font-semibold hover:text-primary transition-colors"
+          >
+            Shop All <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
 
         {/* Products grid */}
         {isLoading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="space-y-4">
-                <Skeleton className="aspect-square w-full" />
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
+              <div key={i}>
+                <Skeleton className="aspect-square w-full mb-3" />
+                <Skeleton className="h-4 w-3/4 mb-2" />
+                <Skeleton className="h-3 w-1/2" />
               </div>
             ))}
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map(({ node: product }) => {
               const price = parseFloat(product.priceRange.minVariantPrice.amount);
               const entries = Math.floor(price);
@@ -48,7 +50,7 @@ export function AllProductsSection() {
                 <Link 
                   key={product.id}
                   to={`/product/${product.handle}`}
-                  className="group bg-muted rounded-lg overflow-hidden"
+                  className="group bg-muted"
                 >
                   <div className="relative aspect-square bg-muted overflow-hidden">
                     {product.featuredImage ? (
@@ -58,21 +60,21 @@ export function AllProductsSection() {
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
                         No Image
                       </div>
                     )}
                   </div>
-                  <div className="p-4 bg-background">
-                    <h3 className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  <div className="p-3 bg-background">
+                    <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
                       {product.title}
                     </h3>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        ${price.toFixed(2)}
+                        ${price.toFixed(0)}
                       </span>
-                      <span className="text-foreground font-heading font-semibold text-sm">
-                        {entries.toLocaleString()} entries
+                      <span className="text-foreground font-heading font-semibold">
+                        {entries} entries
                       </span>
                     </div>
                   </div>
@@ -82,12 +84,12 @@ export function AllProductsSection() {
           </div>
         )}
 
-        {/* View all link */}
-        <div className="text-center mt-10">
-          <Button asChild variant="outline" size="lg">
-            <Link to="/products" className="inline-flex items-center gap-2">
-              Shop All Products
-              <ArrowRight className="w-4 h-4" />
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button asChild variant="outline">
+            <Link to="/products">
+              View All Products
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </div>

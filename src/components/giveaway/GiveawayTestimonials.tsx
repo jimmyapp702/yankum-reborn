@@ -1,18 +1,16 @@
-import { Quote } from 'lucide-react';
-
 const testimonials = [
   {
-    quote: "I never win anything, but here I am with a fully-built rig in my driveway. Still can't believe it.",
+    quote: "Never win anything. But here I am with a fully-built rig in my driveway.",
     author: "Jake M.",
     location: "Colorado",
   },
   {
-    quote: "Entered on a whim when I bought a rope. Two months later I got the call. Best decision ever.",
+    quote: "Entered on a whim. Two months later I got the call.",
     author: "Sarah T.",
     location: "Texas",
   },
   {
-    quote: "The whole process was legit. They handled everything - taxes, shipping, documentation.",
+    quote: "Completely legit. They handled everything.",
     author: "Marcus R.",
     location: "Arizona",
   },
@@ -20,32 +18,24 @@ const testimonials = [
 
 export function GiveawayTestimonials() {
   return (
-    <section className="py-20 bg-secondary">
+    <section className="py-16 bg-secondary border-y border-secondary-foreground/10">
       <div className="container-wide">
-        <div className="text-center mb-12">
-          <p className="text-primary font-heading font-semibold uppercase tracking-wider text-sm mb-3">
-            Past Winners
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-secondary-foreground">
-            Real People. Real Wins.
-          </h2>
-        </div>
+        <p className="text-center text-xs font-heading uppercase tracking-widest text-secondary-foreground/50 mb-8">
+          Past Winners
+        </p>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-background rounded-lg p-8">
-              <Quote className="w-8 h-8 text-primary/30 mb-4" />
-              <p className="text-foreground text-lg mb-6 leading-relaxed">
+            <div key={index} className="text-center">
+              <p className="text-secondary-foreground text-lg mb-4 leading-relaxed">
                 "{testimonial.quote}"
               </p>
-              <div>
-                <p className="font-heading font-bold text-foreground">
-                  {testimonial.author}
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  {testimonial.location}
-                </p>
-              </div>
+              <p className="font-heading font-bold text-secondary-foreground text-sm">
+                {testimonial.author}
+              </p>
+              <p className="text-secondary-foreground/50 text-xs">
+                {testimonial.location}
+              </p>
             </div>
           ))}
         </div>
