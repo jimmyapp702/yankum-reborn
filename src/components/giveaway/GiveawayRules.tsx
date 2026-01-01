@@ -1,4 +1,4 @@
-import { FileText, Calendar, MapPin, AlertCircle } from 'lucide-react';
+import { Calendar, MapPin, FileText, AlertCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const rules = [
@@ -30,51 +30,60 @@ const rules = [
 
 export function GiveawayRules() {
   return (
-    <section className="section-padding bg-background">
-      <div className="container-wide">
+    <section className="py-24 md:py-32 bg-yankum-charcoal relative overflow-hidden">
+      {/* Top border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yankum-steel/30 to-transparent" />
+
+      <div className="container-wide relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Header info */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-12">
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
-              <Calendar className="w-6 h-6 text-primary flex-shrink-0" />
+          <div className="grid sm:grid-cols-3 gap-4 mb-16">
+            <div className="flex items-center gap-4 bg-yankum-black border border-yankum-steel/20 p-5">
+              <div className="w-12 h-12 bg-yankum-charcoal border border-yankum-steel/30 flex items-center justify-center flex-shrink-0">
+                <Calendar className="w-5 h-5 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Giveaway Period</p>
-                <p className="font-semibold text-foreground">Jan 1 - Jan 31, 2026</p>
+                <p className="text-xs text-yankum-steel uppercase tracking-wider mb-1">Period</p>
+                <p className="font-heading font-bold text-primary-foreground text-sm">Jan 1 - Jan 31, 2026</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
-              <MapPin className="w-6 h-6 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 bg-yankum-black border border-yankum-steel/20 p-5">
+              <div className="w-12 h-12 bg-yankum-charcoal border border-yankum-steel/30 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Eligibility</p>
-                <p className="font-semibold text-foreground">US Residents 18+</p>
+                <p className="text-xs text-yankum-steel uppercase tracking-wider mb-1">Eligibility</p>
+                <p className="font-heading font-bold text-primary-foreground text-sm">US Residents 18+</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
-              <FileText className="w-6 h-6 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 bg-yankum-black border border-yankum-steel/20 p-5">
+              <div className="w-12 h-12 bg-yankum-charcoal border border-yankum-steel/30 flex items-center justify-center flex-shrink-0">
+                <FileText className="w-5 h-5 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Odds of Winning</p>
-                <p className="font-semibold text-foreground">Based on Entries</p>
+                <p className="text-xs text-yankum-steel uppercase tracking-wider mb-1">Odds</p>
+                <p className="font-heading font-bold text-primary-foreground text-sm">Based on Entries</p>
               </div>
             </div>
           </div>
 
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground tracking-tight">
               OFFICIAL RULES & FAQ
             </h2>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3">
             {rules.map((rule, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-muted rounded-lg px-6 border-0"
+                className="bg-yankum-black border border-yankum-steel/20 px-6 data-[state=open]:border-primary/30 transition-colors"
               >
-                <AccordionTrigger className="text-left font-heading font-semibold text-foreground hover:no-underline py-4">
+                <AccordionTrigger className="text-left font-heading font-semibold text-primary-foreground hover:no-underline py-5 text-base">
                   {rule.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-4">
+                <AccordionContent className="text-yankum-steel pb-5 leading-relaxed">
                   {rule.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -82,21 +91,23 @@ export function GiveawayRules() {
           </Accordion>
 
           {/* Legal disclaimer */}
-          <div className="mt-12 p-6 bg-muted rounded-lg border border-border">
-            <div className="flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-muted-foreground flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-muted-foreground">
-                <p className="font-semibold text-foreground mb-2">Legal Disclaimer</p>
-                <p>
+          <div className="mt-16 bg-yankum-black border border-yankum-steel/20 p-8">
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 bg-yankum-charcoal border border-yankum-steel/30 flex items-center justify-center flex-shrink-0">
+                <AlertCircle className="w-5 h-5 text-yankum-steel" />
+              </div>
+              <div className="text-sm text-yankum-steel leading-relaxed">
+                <p className="font-heading font-semibold text-primary-foreground mb-3 uppercase tracking-wider text-xs">
+                  Legal Disclaimer
+                </p>
+                <p className="mb-4">
                   NO PURCHASE NECESSARY TO ENTER OR WIN. A purchase will not improve your chances of winning. 
                   Void where prohibited by law. This promotion is in no way sponsored, endorsed, administered by, 
-                  or associated with Facebook, Instagram, or any other social media platform. By entering, 
-                  participants agree to release and hold harmless Yankum Ropes LLC and its affiliates from 
-                  any liability arising from participation in this giveaway.
+                  or associated with Facebook, Instagram, or any other social media platform.
                 </p>
-                <p className="mt-4">
-                  For complete official rules, please contact us at{' '}
-                  <a href="mailto:giveaway@yankum.com" className="text-primary underline">
+                <p>
+                  For complete official rules, contact{' '}
+                  <a href="mailto:giveaway@yankum.com" className="text-primary hover:underline">
                     giveaway@yankum.com
                   </a>
                 </p>

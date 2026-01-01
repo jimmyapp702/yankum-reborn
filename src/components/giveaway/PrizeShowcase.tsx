@@ -1,4 +1,4 @@
-import { Gift, Package, Shield, Wrench } from 'lucide-react';
+import { Gift, Truck, Shield, Wrench } from 'lucide-react';
 import heroRope from '@/assets/hero-kinetic-rope.png';
 
 const prizes = [
@@ -30,59 +30,71 @@ const prizes = [
 
 const features = [
   { icon: Gift, text: 'Total Value Over $2,500' },
-  { icon: Package, text: 'Free Shipping Included' },
+  { icon: Truck, text: 'Free Shipping Included' },
   { icon: Shield, text: 'Lifetime Warranty' },
-  { icon: Wrench, text: 'Complete Kit Ready to Use' },
+  { icon: Wrench, text: 'Complete Kit Ready' },
 ];
 
 export function PrizeShowcase() {
   return (
-    <section className="section-padding bg-background">
-      <div className="container-wide">
-        <div className="text-center mb-12">
-          <span className="text-primary font-heading font-semibold uppercase tracking-wider">
+    <section id="prizes" className="py-24 md:py-32 bg-yankum-charcoal relative overflow-hidden">
+      {/* Diagonal accent */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yankum-steel/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yankum-steel/30 to-transparent" />
+
+      <div className="container-wide relative z-10">
+        <div className="text-center mb-16">
+          <p className="text-primary font-heading font-semibold uppercase tracking-[0.3em] text-sm mb-4">
             What You Could Win
-          </span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mt-2 mb-4">
-            THE ULTIMATE RECOVERY BUNDLE
+          </p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-primary-foreground tracking-tight mb-6">
+            THE ULTIMATE<br />RECOVERY BUNDLE
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Everything you need for safe, effective vehicle recovery — all in one incredible prize package.
+          <div className="w-16 h-1 bg-primary mx-auto mb-6" />
+          <p className="text-yankum-steel text-lg max-w-2xl mx-auto">
+            Professional-grade recovery gear trusted by off-road enthusiasts worldwide.
           </p>
         </div>
 
         {/* Feature badges */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
           {features.map((feature) => (
-            <div key={feature.text} className="flex items-center gap-2 bg-muted px-4 py-2 rounded-full">
-              <feature.icon className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-foreground">{feature.text}</span>
+            <div 
+              key={feature.text} 
+              className="flex items-center gap-3 bg-yankum-black/50 border border-yankum-steel/20 px-4 py-4"
+            >
+              <feature.icon className="w-5 h-5 text-primary flex-shrink-0" />
+              <span className="text-sm font-heading font-semibold text-primary-foreground uppercase tracking-wider">
+                {feature.text}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Prize grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {prizes.map((prize) => (
+          {prizes.map((prize, index) => (
             <div 
               key={prize.name}
-              className="group bg-muted rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              className="group bg-yankum-black border border-yankum-steel/20 overflow-hidden hover:border-primary/50 transition-all duration-500"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="aspect-square relative overflow-hidden bg-background">
+              <div className="aspect-square relative overflow-hidden bg-yankum-charcoal">
                 <img
                   src={prize.image}
                   alt={prize.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded font-heading font-bold">
+                <div className="absolute inset-0 bg-gradient-to-t from-yankum-black/80 via-transparent to-transparent" />
+                <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 font-heading font-bold text-sm tracking-wider">
                   {prize.value}
                 </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-heading font-bold text-foreground mb-1">
+              <div className="p-5 border-t border-yankum-steel/20">
+                <h3 className="font-heading font-bold text-primary-foreground text-lg mb-2 tracking-tight">
                   {prize.name}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-yankum-steel">
                   {prize.description}
                 </p>
               </div>
@@ -91,9 +103,19 @@ export function PrizeShowcase() {
         </div>
 
         {/* Total value banner */}
-        <div className="mt-12 bg-primary text-primary-foreground rounded-lg p-8 text-center">
-          <p className="text-lg font-semibold mb-2">TOTAL PRIZE VALUE</p>
-          <p className="text-5xl md:text-6xl font-heading font-bold">$2,500+</p>
+        <div className="mt-16 bg-yankum-black border border-primary/30 p-10 md:p-12 text-center relative overflow-hidden">
+          {/* Corner accents */}
+          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary" />
+          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary" />
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary" />
+          
+          <p className="text-yankum-steel font-heading font-semibold uppercase tracking-[0.3em] text-sm mb-3">
+            Total Prize Value
+          </p>
+          <p className="text-5xl sm:text-6xl md:text-7xl font-heading font-bold text-primary">
+            $2,500<span className="text-3xl align-top">+</span>
+          </p>
         </div>
       </div>
     </section>
