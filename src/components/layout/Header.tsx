@@ -34,22 +34,40 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             <Link
-              to="/products"
-              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+              to="/products/kinetic-recovery-rope"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
             >
-              All Products
+              Kinetic Ropes
             </Link>
             <Link
-              to="/learn"
-              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+              to="/collections/shackles"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
             >
-              Learn
+              Soft Shackles
             </Link>
             <Link
-              to="/about"
-              className="inline-flex items-center justify-center h-10 px-4 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+              to="/collections/recovery-kits"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
             >
-              Our Story
+              Recovery Kits
+            </Link>
+            <Link
+              to="/collections/winchline-accessories"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              Winching
+            </Link>
+            <Link
+              to="/collections/recovery-tools"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              Recovery Tools
+            </Link>
+            <Link
+              to="/giveaway"
+              className="inline-flex items-center justify-center h-10 px-3 py-2 font-heading text-sm uppercase tracking-wider transition-colors hover:text-primary"
+            >
+              Giveaway
             </Link>
           </nav>
 
@@ -77,25 +95,46 @@ export function Header() {
                 </SheetHeader>
                 <nav className="mt-8 flex flex-col gap-4">
                   <Link
-                    to="/products"
+                    to="/products/kinetic-recovery-rope"
                     onClick={() => setMobileMenuOpen(false)}
                     className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
                   >
-                    All Products
+                    Kinetic Ropes
                   </Link>
                   <Link
-                    to="/learn"
+                    to="/collections/shackles"
                     onClick={() => setMobileMenuOpen(false)}
                     className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
                   >
-                    Learn
+                    Soft Shackles
                   </Link>
                   <Link
-                    to="/about"
+                    to="/collections/recovery-kits"
                     onClick={() => setMobileMenuOpen(false)}
                     className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
                   >
-                    Our Story
+                    Recovery Kits
+                  </Link>
+                  <Link
+                    to="/collections/winchline-accessories"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
+                  >
+                    Winching
+                  </Link>
+                  <Link
+                    to="/collections/recovery-tools"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
+                  >
+                    Recovery Tools
+                  </Link>
+                  <Link
+                    to="/giveaway"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-heading text-lg uppercase tracking-wider py-2 border-b border-border"
+                  >
+                    Giveaway
                   </Link>
                 </nav>
               </SheetContent>
