@@ -9,6 +9,9 @@ import { PrizeShowcase } from '@/components/giveaway/PrizeShowcase';
 import { GiveawayTestimonials } from '@/components/giveaway/GiveawayTestimonials';
 import { GiveawayEntryForm } from '@/components/giveaway/GiveawayEntryForm';
 import { GiveawayRules } from '@/components/giveaway/GiveawayRules';
+import { PreviousWinners } from '@/components/giveaway/PreviousWinners';
+import { QuickEntrySection } from '@/components/giveaway/QuickEntrySection';
+import { MysteryBagSection } from '@/components/giveaway/MysteryBagSection';
 
 export default function Giveaway() {
   return (
@@ -29,6 +32,9 @@ export default function Giveaway() {
         <GiveawayHero />
         <CountdownTimer />
         <HowToEnter />
+        <PreviousWinners />
+        <QuickEntrySection />
+        <MysteryBagSection />
         <FeaturedMultiplierCollection />
         <AllProductsSection />
         <PrizeShowcase />
