@@ -22,58 +22,76 @@ export function GiveawayHero() {
   };
 
   return (
-    <section className="relative py-28 md:py-36 bg-secondary overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }} />
-      </div>
-      
-      <div className="container-wide relative">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* Prize value badge */}
-          <div className="inline-block mb-8">
-            <span className="text-primary font-heading text-sm font-bold tracking-[0.2em] uppercase">
+    <section className="relative py-20 md:py-28 bg-secondary overflow-hidden">
+      <div className="container-wide">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Copy */}
+          <div>
+            <p className="text-primary font-heading text-sm font-bold tracking-[0.2em] uppercase mb-4">
               $75,000+ Grand Prize
-            </span>
-          </div>
-          
-          {/* Headline */}
-          <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-secondary-foreground leading-[0.95] mb-6">
-            Win a Fully-Built
-            <span className="block text-primary">Off-Road Rig</span>
-          </h1>
-          
-          <p className="text-secondary-foreground/60 text-lg max-w-md mx-auto mb-12">
-            Every $1 spent = 1 entry. Featured products earn 20X. 
-            Sign up for 100 free entries.
-          </p>
-          
-          {/* Entry form */}
-          <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-            <div className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="Your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-12 bg-background/10 border-secondary-foreground/20 text-secondary-foreground placeholder:text-secondary-foreground/40"
-              />
-              <Button 
-                type="submit" 
-                disabled={isLoading}
-                className="h-12 px-6 shrink-0"
-              >
-                {isLoading ? '...' : 'Enter Free'}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </div>
-            <p className="text-secondary-foreground/40 text-xs mt-4">
-              No purchase necessary to enter or win.
             </p>
-          </form>
+            
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-secondary-foreground leading-[0.95] mb-6">
+              Win a Fully-Built
+              <span className="block text-primary">Off-Road Rig</span>
+            </h1>
+            
+            <p className="text-secondary-foreground/60 text-lg max-w-md mb-8">
+              Every $1 you spend = 1 entry. Featured products earn 20X entries. 
+              Sign up now and get 100 free entries instantly.
+            </p>
+
+            <div className="flex flex-wrap gap-6 text-sm">
+              <div>
+                <span className="text-3xl font-heading font-bold text-primary">100</span>
+                <p className="text-secondary-foreground/50">Free entries on signup</p>
+              </div>
+              <div>
+                <span className="text-3xl font-heading font-bold text-primary">20X</span>
+                <p className="text-secondary-foreground/50">On featured products</p>
+              </div>
+              <div>
+                <span className="text-3xl font-heading font-bold text-primary">50</span>
+                <p className="text-secondary-foreground/50">Per friend referred</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right - Form */}
+          <div className="lg:pl-8">
+            <div className="bg-background p-8 md:p-10 rounded-lg">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
+                Enter to Win
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Get 100 free entries when you sign up. No purchase necessary.
+              </p>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-12 bg-muted border-0"
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="w-full h-12"
+                >
+                  {isLoading ? 'Entering...' : 'Get 100 Free Entries'}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </form>
+              
+              <p className="text-muted-foreground text-xs mt-4 text-center">
+                By entering, you agree to our terms and conditions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
