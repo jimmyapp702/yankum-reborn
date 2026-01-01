@@ -76,7 +76,7 @@ export function GiveawayHero() {
                 asChild 
                 variant="outline" 
                 size="lg" 
-                className="font-heading font-bold uppercase tracking-wider border-white text-white hover:bg-white hover:text-secondary"
+                className="font-heading font-bold uppercase tracking-wider border-white text-secondary bg-white hover:bg-white/90"
               >
                 <Link to="/products">
                   Shop Products
