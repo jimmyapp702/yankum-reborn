@@ -31,15 +31,13 @@ export default function Giveaway() {
       <Layout>
         <GiveawayHero />
         <CountdownTimer />
-        <HowToEnter />
-        <PreviousWinners />
         <QuickEntrySection />
-        <MysteryBagSection />
         <FeaturedMultiplierCollection />
-        <AllProductsSection />
+        <MysteryBagSection />
+        <HowToEnter />
         <PrizeShowcase />
-        <GiveawayTestimonials />
-        <GiveawayEntryForm />
+        <PreviousWinners />
+        <AllProductsSection />
         <GiveawayRules />
       </Layout>
     </>
