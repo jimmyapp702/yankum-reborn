@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -22,56 +22,50 @@ export function GiveawayHero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-secondary overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=2000&q=80"
-          alt="Off-road vehicle"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary/70" />
-      </div>
-      
-      <div className="relative container-wide py-20">
-        <div className="max-w-2xl">
-          {/* Prize value */}
-          <p className="text-primary font-heading font-bold text-lg tracking-wider mb-4">
-            $75,000+ VALUE
-          </p>
+    <section className="relative py-24 md:py-32 bg-secondary overflow-hidden">
+      <div className="container-wide">
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-8">
+            <Gift className="w-4 h-4" />
+            <span className="font-heading font-semibold text-sm uppercase tracking-wider">
+              $75,000+ Grand Prize
+            </span>
+          </div>
           
           {/* Headline */}
-          <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-secondary-foreground leading-[0.9] mb-6">
-            WIN A FULLY-BUILT
-            <br />
-            <span className="text-primary">OFF-ROAD RIG</span>
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-secondary-foreground leading-tight mb-6">
+            Win a Fully-Built
+            <span className="text-primary block">Off-Road Rig</span>
           </h1>
           
-          <p className="text-secondary-foreground/70 text-xl max-w-lg mb-10">
-            Enter for free. Shop to earn more entries. Every $1 = 1 entry.
+          <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-xl mx-auto mb-10">
+            Every $1 you spend = 1 entry. Featured products earn 20X entries.
+            Sign up now for 100 free entries.
           </p>
           
           {/* Entry form */}
-          <form onSubmit={handleSubmit} className="max-w-md mb-8">
-            <div className="flex gap-2">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-14 bg-secondary-foreground text-foreground border-0 placeholder:text-muted-foreground"
+                className="h-14 bg-background text-foreground border-border"
               />
               <Button 
                 type="submit" 
                 disabled={isLoading}
-                className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold"
+                size="lg"
+                className="h-14 px-8"
               >
-                {isLoading ? '...' : 'Enter'}
+                {isLoading ? 'Entering...' : 'Get 100 Free Entries'}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
-            <p className="text-secondary-foreground/50 text-sm mt-3">
-              100 free entries on signup. No purchase necessary.
+            <p className="text-secondary-foreground/50 text-sm mt-4">
+              No purchase necessary to enter.
             </p>
           </form>
         </div>
