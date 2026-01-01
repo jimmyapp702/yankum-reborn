@@ -19,12 +19,12 @@ const rules = [
     answer: 'The winner will be announced within 7 days of the giveaway end date via email and on our social media channels. Winners will be contacted directly via the email address provided during entry.'
   },
   {
-    question: 'Can I enter multiple times?',
-    answer: 'Each person may only submit one email entry. However, you can earn additional entries through referrals (50 entries per successful referral), purchases (20 entries per $1 spent), and social media engagement.'
+    question: 'What happens with taxes and registration?',
+    answer: 'The winner is responsible for all applicable taxes, title, and registration fees. We will provide documentation and assistance to help you through the process. We cover shipping anywhere in the continental US.'
   },
   {
     question: 'What if I win?',
-    answer: 'Winners will be notified via email and must respond within 72 hours to claim their prize. Prizes will be shipped to the winner free of charge within the continental United States.'
+    answer: 'Winners will be notified via email and must respond within 72 hours to claim their prize. The vehicle will be delivered to the winner free of charge within the continental United States.'
   }
 ];
 
