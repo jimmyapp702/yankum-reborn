@@ -27,10 +27,10 @@ export function GiveawayEntryForm() {
         <div className="max-w-2xl mx-auto text-center">
           {/* Header */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4">
-            READY TO WIN?
+            DON'T MISS YOUR SHOT
           </h2>
           <p className="text-primary-foreground/80 text-lg mb-10">
-            Enter your email below to claim your 100 free entries and get started.
+            Enter now for your chance to win this $75,000+ fully-built rig. 100 free entries just for signing up.
           </p>
           
           {/* Form */}

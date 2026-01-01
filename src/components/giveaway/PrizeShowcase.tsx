@@ -1,43 +1,35 @@
-import { Check, Star } from 'lucide-react';
-import heroRopeImage from '@/assets/hero-kinetic-rope.png';
+import { Check, Wrench, Shield, Truck, Gauge } from 'lucide-react';
 
-const prizes = [
+const vehicleSpecs = [
   {
-    name: '1" Kinetic Recovery Rope',
-    value: '$329',
-    specs: '30ft length, 33,500 lb MBS',
-    featured: true,
+    icon: Wrench,
+    title: 'Fully Built',
+    description: 'Custom suspension, armor, and accessories installed',
   },
   {
-    name: 'Soft Shackle Set',
-    value: '$189',
-    specs: 'Pair of 7/16" synthetic shackles',
-    featured: false,
+    icon: Shield,
+    title: 'Trail Ready',
+    description: 'Built to conquer any terrain you throw at it',
   },
   {
-    name: 'Recovery Damper Bag',
-    value: '$79',
-    specs: 'Weighted line damper for safety',
-    featured: false,
+    icon: Truck,
+    title: 'Delivered Free',
+    description: 'We cover shipping anywhere in the continental US',
   },
   {
-    name: 'Premium Gear Bag',
-    value: '$149',
-    specs: 'Heavy-duty storage solution',
-    featured: false,
+    icon: Gauge,
+    title: 'Turn-Key',
+    description: 'Drive it off the trailer and hit the trails',
   },
-  {
-    name: 'D-Ring Shackles',
-    value: '$89',
-    specs: 'Pair of 3/4" steel shackles',
-    featured: false,
-  },
-  {
-    name: 'Recovery Gloves',
-    value: '$49',
-    specs: 'Heavy-duty leather work gloves',
-    featured: false,
-  },
+];
+
+const buildHighlights = [
+  'Custom lift kit & suspension',
+  '35" all-terrain tires',
+  'Front & rear bumpers with winch',
+  'LED light bar & rock lights',
+  'Roof rack & cargo system',
+  'Premium recovery gear included',
 ];
 
 export function PrizeShowcase() {
@@ -47,59 +39,61 @@ export function PrizeShowcase() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-block text-sm font-heading font-semibold uppercase tracking-widest text-primary mb-4">
-            What You Could Win
+            The Grand Prize
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground">
-            THE PRIZE PACKAGE
+            FULLY-BUILT OFF-ROAD RIG
           </h2>
         </div>
         
+        {/* Vehicle specs grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {vehicleSpecs.map((spec, index) => (
+            <div key={index} className="bg-background p-6 text-center">
+              <div className="w-14 h-14 bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <spec.icon className="w-7 h-7 text-primary" />
+              </div>
+              <h3 className="font-heading font-bold text-foreground mb-2">{spec.title}</h3>
+              <p className="text-sm text-muted-foreground">{spec.description}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Featured image */}
+          {/* Left: Vehicle image */}
           <div className="relative">
-            <div className="aspect-square bg-background rounded-sm p-8 flex items-center justify-center">
+            <div className="aspect-[4/3] bg-background rounded-sm overflow-hidden">
               <img 
-                src={heroRopeImage}
-                alt="Yankum Kinetic Recovery Rope"
-                className="w-full h-full object-contain"
+                src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
+                alt="Custom built off-road vehicle"
+                className="w-full h-full object-cover"
               />
             </div>
             {/* Value badge */}
             <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-6 py-3">
               <p className="text-sm font-heading uppercase tracking-wider">Total Value</p>
-              <p className="text-2xl font-heading font-bold">$2,500+</p>
+              <p className="text-2xl font-heading font-bold">$75,000+</p>
             </div>
           </div>
           
-          {/* Right: Prize list */}
-          <div className="space-y-4">
-            {prizes.map((prize, index) => (
-              <div 
-                key={index}
-                className={`flex items-center gap-4 p-5 bg-background border transition-all duration-200 hover:border-primary/50 ${
-                  prize.featured ? 'border-primary' : 'border-border'
-                }`}
-              >
-                <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 ${
-                  prize.featured ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
-                }`}>
-                  {prize.featured ? (
-                    <Star className="w-5 h-5" />
-                  ) : (
+          {/* Right: Build highlights */}
+          <div>
+            <h3 className="text-2xl font-heading font-bold text-foreground mb-6">
+              BUILD HIGHLIGHTS
+            </h3>
+            <div className="space-y-4">
+              {buildHighlights.map((highlight, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center gap-4 p-4 bg-background border border-border"
+                >
+                  <div className="w-10 h-10 bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
                     <Check className="w-5 h-5" />
-                  )}
+                  </div>
+                  <span className="font-heading font-semibold text-foreground">{highlight}</span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-heading font-bold text-foreground">
-                    {prize.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{prize.specs}</p>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <span className="font-heading font-bold text-lg text-primary">{prize.value}</span>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

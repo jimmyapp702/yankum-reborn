@@ -2,32 +2,32 @@ import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: "Yankum ropes have saved me countless times on the trail. The quality is unmatched.",
-    author: "Mike R.",
+    quote: "I never win anything, but here I am with a fully-built rig in my driveway. Still can't believe it's real.",
+    author: "Jake M.",
     location: "Colorado",
-    vehicle: "2021 Ford Bronco",
+    winner: "2024 Jeep Wrangler",
     rating: 5,
   },
   {
-    quote: "Best investment I've made for off-roading. These ropes are built to last.",
+    quote: "Entered on a whim and two months later I got the call. Best decision I ever made was hitting that submit button.",
     author: "Sarah T.",
-    location: "Utah",
-    vehicle: "2020 Jeep Wrangler",
+    location: "Texas",
+    winner: "2023 Ford Bronco",
     rating: 5,
   },
   {
-    quote: "The kinetic energy recovery is incredible. Pulled my buddy's stuck truck out with ease.",
-    author: "James K.",
+    quote: "The whole process was legit. They handled everything — taxes, shipping, registration help. Top notch.",
+    author: "Marcus R.",
     location: "Arizona",
-    vehicle: "2019 Toyota 4Runner",
+    winner: "2024 Toyota 4Runner",
     rating: 5,
   },
 ];
 
 const stats = [
-  { value: '50K+', label: 'Total Entries' },
-  { value: '127', label: 'Winners' },
-  { value: '$75K+', label: 'Prizes Given' },
+  { value: '150K+', label: 'Entries' },
+  { value: '23', label: 'Vehicles Given' },
+  { value: '$1.2M+', label: 'In Prizes' },
 ];
 
 export function GiveawayTestimonials() {
@@ -51,10 +51,10 @@ export function GiveawayTestimonials() {
         {/* Section header */}
         <div className="text-center mb-12">
           <span className="inline-block text-sm font-heading font-semibold uppercase tracking-widest text-primary mb-4">
-            Real Customers
+            Past Winners
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground">
-            WHY THEY TRUST YANKUM
+            REAL WINNERS. REAL RIGS.
           </h2>
         </div>
 
@@ -86,7 +86,10 @@ export function GiveawayTestimonials() {
                   {testimonial.author}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {testimonial.location} • {testimonial.vehicle}
+                  {testimonial.location}
+                </p>
+                <p className="text-sm text-primary font-semibold mt-1">
+                  Won: {testimonial.winner}
                 </p>
               </div>
             </div>

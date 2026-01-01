@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Gift, Zap } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -48,14 +48,12 @@ export function GiveawayHero() {
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-secondary-foreground leading-[0.95] tracking-tight">
-                WIN THE
+                WIN THIS
                 <br />
-                <span className="text-primary">ULTIMATE</span>
-                <br />
-                RECOVERY KIT
+                <span className="text-primary">VEHICLE</span>
               </h1>
               <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-md leading-relaxed">
-                Over $2,500 in premium Yankum Ropes gear. Enter now for your chance to win.
+                Enter now for your chance to win a fully-built, trail-ready rig worth over $75,000. No purchase necessary.
               </p>
             </div>
             
@@ -86,7 +84,7 @@ export function GiveawayHero() {
             {/* Stats row */}
             <div className="flex flex-wrap gap-8 pt-4">
               <div className="space-y-1">
-                <p className="text-3xl md:text-4xl font-heading font-bold text-primary">$2,500+</p>
+                <p className="text-3xl md:text-4xl font-heading font-bold text-primary">$75K+</p>
                 <p className="text-secondary-foreground/60 text-sm uppercase tracking-wider">Prize Value</p>
               </div>
               <div className="space-y-1">
@@ -100,24 +98,20 @@ export function GiveawayHero() {
             </div>
           </div>
           
-          {/* Right visual */}
+          {/* Right visual - Vehicle image */}
           <div className="relative hidden lg:block">
-            <div className="relative aspect-square">
-              {/* Background circle */}
-              <div className="absolute inset-8 bg-primary/10 rounded-full" />
-              
-              {/* Gift box visual */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <div className="w-64 h-64 bg-gradient-to-br from-primary to-primary/80 rounded-sm transform rotate-12 shadow-2xl flex items-center justify-center">
-                    <Gift className="w-32 h-32 text-primary-foreground" />
-                  </div>
-                  {/* Floating elements */}
-                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-secondary-foreground rounded-sm flex items-center justify-center shadow-lg animate-pulse">
-                    <span className="text-2xl font-heading font-bold text-secondary">?</span>
-                  </div>
-                  <div className="absolute -bottom-4 -left-8 w-20 h-20 bg-primary/20 rounded-full" />
-                </div>
+            <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80"
+                alt="Off-road vehicle prize"
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
+              {/* Value badge */}
+              <div className="absolute bottom-6 left-6 bg-primary text-primary-foreground px-6 py-3">
+                <p className="text-sm font-heading uppercase tracking-wider">Valued At</p>
+                <p className="text-3xl font-heading font-bold">$75,000+</p>
               </div>
             </div>
           </div>
