@@ -33,61 +33,48 @@ const steps = [
 
 export function HowToEnter() {
   return (
-    <section className="py-24 md:py-32 bg-yankum-black relative overflow-hidden">
-      {/* Vertical accent lines */}
-      <div className="absolute left-[20%] top-0 w-px h-full bg-gradient-to-b from-transparent via-yankum-steel/10 to-transparent" />
-      <div className="absolute right-[20%] top-0 w-px h-full bg-gradient-to-b from-transparent via-yankum-steel/10 to-transparent" />
-
-      <div className="container-wide relative z-10">
-        <div className="text-center mb-20">
-          <p className="text-primary font-heading font-semibold uppercase tracking-[0.3em] text-sm mb-4">
+    <section className="section-padding bg-secondary text-secondary-foreground">
+      <div className="container-wide">
+        <div className="text-center mb-16">
+          <span className="text-primary font-heading font-semibold uppercase tracking-wider text-sm">
             Simple Steps
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-primary-foreground tracking-tight mb-6">
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mt-2 mb-4">
             HOW TO ENTER
           </h2>
-          <div className="w-16 h-1 bg-primary mx-auto mb-6" />
-          <p className="text-yankum-steel text-lg max-w-xl mx-auto">
+          <p className="text-secondary-foreground/70 text-lg max-w-xl mx-auto">
             Multiple ways to enter means more chances to win.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <div 
               key={step.number}
               className="relative group"
             >
-              {/* Large step number */}
-              <div className="absolute -top-6 -left-2 text-[120px] font-heading font-bold text-yankum-charcoal/50 leading-none select-none z-0">
+              {/* Step number background */}
+              <div className="absolute -top-4 -left-2 text-8xl font-heading font-bold text-primary/10 select-none">
                 {step.number}
               </div>
               
-              <div className="relative z-10 bg-yankum-charcoal border border-yankum-steel/20 p-8 h-full hover:border-primary/40 transition-all duration-300">
-                {/* Top accent line */}
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-primary via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="w-14 h-14 bg-yankum-black border border-yankum-steel/30 flex items-center justify-center mb-6">
-                  <step.icon className="w-6 h-6 text-primary" />
+              <div className="relative bg-secondary-foreground/5 rounded-sm p-6 border border-secondary-foreground/10 hover:border-primary/50 transition-colors h-full">
+                <div className="w-14 h-14 bg-primary/10 rounded-sm flex items-center justify-center mb-4">
+                  <step.icon className="w-7 h-7 text-primary" />
                 </div>
                 
-                <h3 className="text-xl font-heading font-bold text-primary-foreground mb-3 tracking-tight">
+                <h3 className="text-xl font-heading font-bold text-secondary-foreground mb-2">
                   {step.title}
                 </h3>
                 
-                <p className="text-yankum-steel text-sm mb-6 leading-relaxed">
+                <p className="text-secondary-foreground/70 text-sm mb-4">
                   {step.description}
                 </p>
                 
-                <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-2 text-sm font-heading font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 rounded-sm text-sm font-heading font-bold">
                   {step.entries}
                 </div>
               </div>
-
-              {/* Connector line (hidden on last item) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-yankum-steel/30" />
-              )}
             </div>
           ))}
         </div>
