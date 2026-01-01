@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useCollectionByHandle } from '@/hooks/useShopify';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -14,34 +14,36 @@ export function FeaturedMultiplierCollection() {
     <section className="py-20 bg-secondary">
       <div className="container-wide">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span className="font-heading font-bold text-sm uppercase tracking-wider">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-heading font-bold uppercase tracking-wider mb-3">
               {MULTIPLIER}X Entries
-            </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-secondary-foreground">
+              Featured Products
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-secondary-foreground mb-3">
-            Featured Products
-          </h2>
-          <p className="text-secondary-foreground/70 max-w-lg mx-auto">
-            These products earn {MULTIPLIER}X the entries. Limited time only.
-          </p>
+          <Link 
+            to={`/collection/${FEATURED_COLLECTION_HANDLE}`}
+            className="inline-flex items-center gap-1 text-primary text-sm font-heading font-semibold hover:underline"
+          >
+            View All <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
 
         {/* Products grid */}
         {isLoading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="space-y-4">
-                <Skeleton className="aspect-square w-full" />
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
+              <div key={i}>
+                <Skeleton className="aspect-square w-full mb-3" />
+                <Skeleton className="h-4 w-3/4 mb-2" />
+                <Skeleton className="h-3 w-1/2" />
               </div>
             ))}
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map(({ node: product }) => {
               const price = parseFloat(product.priceRange.minVariantPrice.amount);
               const entries = Math.floor(price) * MULTIPLIER;
@@ -50,7 +52,7 @@ export function FeaturedMultiplierCollection() {
                 <Link 
                   key={product.id}
                   to={`/product/${product.handle}`}
-                  className="group bg-background rounded-lg overflow-hidden"
+                  className="group bg-background"
                 >
                   <div className="relative aspect-square bg-muted overflow-hidden">
                     {product.featuredImage ? (
@@ -60,23 +62,23 @@ export function FeaturedMultiplierCollection() {
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
                         No Image
                       </div>
                     )}
-                    <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-heading font-bold">
+                    <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-0.5 text-xs font-heading font-bold">
                       {MULTIPLIER}X
                     </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                  <div className="p-3">
+                    <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
                       {product.title}
                     </h3>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        ${price.toFixed(2)}
+                        ${price.toFixed(0)}
                       </span>
-                      <span className="text-primary font-heading font-bold text-sm">
+                      <span className="text-primary font-heading font-bold">
                         {entries.toLocaleString()} entries
                       </span>
                     </div>
@@ -86,17 +88,6 @@ export function FeaturedMultiplierCollection() {
             })}
           </div>
         )}
-
-        {/* View all link */}
-        <div className="text-center mt-10">
-          <Link 
-            to={`/collection/${FEATURED_COLLECTION_HANDLE}`}
-            className="inline-flex items-center gap-2 text-primary font-heading font-semibold hover:underline"
-          >
-            View All Featured Products
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Gift } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -24,42 +24,34 @@ export function GiveawayEntryForm() {
   return (
     <section className="py-20 bg-primary">
       <div className="container-wide">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="w-16 h-16 bg-primary-foreground/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Gift className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-primary-foreground mb-4">
+        <div className="max-w-md mx-auto text-center">
+          <h2 className="text-3xl font-heading font-bold text-primary-foreground mb-3">
             Ready to Win?
           </h2>
-          <p className="text-primary-foreground/80 text-lg mb-8">
-            Enter now for your chance to win. Get 100 free entries instantly.
+          <p className="text-primary-foreground/70 mb-8">
+            100 free entries. No purchase necessary.
           </p>
           
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-3">
+          <form onSubmit={handleSubmit}>
+            <div className="flex gap-2">
               <Input
                 type="email"
-                placeholder="Your email address"
+                placeholder="Your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-14 bg-primary-foreground text-foreground border-0"
+                className="h-12 bg-primary-foreground text-foreground border-0"
               />
               <Button 
                 type="submit" 
                 disabled={isLoading}
                 variant="secondary"
-                size="lg"
-                className="h-14 px-8"
+                className="h-12 px-6 shrink-0"
               >
-                {isLoading ? 'Entering...' : 'Enter Now'}
+                {isLoading ? '...' : 'Enter'}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
           </form>
-          
-          <p className="text-primary-foreground/50 text-sm mt-6">
-            No purchase necessary. Must be 18+ to enter.
-          </p>
         </div>
       </div>
     </section>
