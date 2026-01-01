@@ -1,96 +1,94 @@
-import { Star, Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Jake M.',
-    location: 'Colorado',
-    text: "I've entered every Yankum giveaway and finally won last month! The quality of their gear is unmatched. Already planning my next off-road trip.",
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-    rating: 5
+    quote: "Yankum ropes have saved me countless times on the trail. The quality is unmatched.",
+    author: "Mike R.",
+    location: "Colorado",
+    vehicle: "2021 Ford Bronco",
+    rating: 5,
   },
   {
-    name: 'Sarah T.',
-    location: 'Texas',
-    text: "Even before winning, I was a customer. Their kinetic ropes have saved me twice on the trails. The giveaway is just a bonus!",
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
-    rating: 5
+    quote: "Best investment I've made for off-roading. These ropes are built to last.",
+    author: "Sarah T.",
+    location: "Utah",
+    vehicle: "2020 Jeep Wrangler",
+    rating: 5,
   },
   {
-    name: 'Mike R.',
-    location: 'Arizona',
-    text: "Entered for the first time last month and won a soft shackle set! Can't believe how easy it was. Already shared with all my wheeling buddies.",
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80',
-    rating: 5
-  }
+    quote: "The kinetic energy recovery is incredible. Pulled my buddy's stuck truck out with ease.",
+    author: "James K.",
+    location: "Arizona",
+    vehicle: "2019 Toyota 4Runner",
+    rating: 5,
+  },
 ];
 
 const stats = [
-  { value: '50,000+', label: 'Total Entries' },
-  { value: '127', label: 'Winners So Far' },
-  { value: '$75K+', label: 'In Prizes Given' },
-  { value: '4.9', label: 'Average Rating' }
+  { value: '50K+', label: 'Total Entries' },
+  { value: '127', label: 'Winners' },
+  { value: '$75K+', label: 'Prizes Given' },
 ];
 
 export function GiveawayTestimonials() {
   return (
-    <section className="section-padding bg-muted">
+    <section className="section-padding bg-background">
       <div className="container-wide">
-        {/* Stats bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        {/* Stats row */}
+        <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mb-20">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-heading font-bold text-primary">
+            <div key={stat.label} className="text-center p-4 md:p-6 bg-muted">
+              <p className="text-2xl md:text-4xl font-heading font-bold text-primary mb-1">
                 {stat.value}
-              </div>
-              <div className="text-sm text-muted-foreground uppercase tracking-wider">
+              </p>
+              <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
                 {stat.label}
-              </div>
+              </p>
             </div>
           ))}
         </div>
 
+        {/* Section header */}
         <div className="text-center mb-12">
-          <span className="text-primary font-heading font-semibold uppercase tracking-wider text-sm">
-            Real Winners, Real Stories
+          <span className="inline-block text-sm font-heading font-semibold uppercase tracking-widest text-primary mb-4">
+            Real Customers
           </span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mt-2">
-            WHAT WINNERS SAY
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground">
+            WHY THEY TRUST YANKUM
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
+        {/* Testimonials grid */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          {testimonials.map((testimonial, index) => (
             <div 
-              key={testimonial.name}
-              className="bg-background rounded-sm p-6 shadow-sm hover:shadow-md transition-shadow relative"
+              key={index}
+              className="relative bg-muted p-8 border-l-4 border-primary"
             >
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
+              {/* Quote icon */}
+              <Quote className="w-10 h-10 text-primary/20 mb-4" />
               
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-                <div>
-                  <h4 className="font-heading font-bold text-foreground">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.location}
-                  </p>
-                </div>
-              </div>
-
+              {/* Rating */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
-
-              <p className="text-muted-foreground leading-relaxed">
-                "{testimonial.text}"
-              </p>
+              
+              {/* Quote text */}
+              <blockquote className="text-foreground leading-relaxed mb-6">
+                "{testimonial.quote}"
+              </blockquote>
+              
+              {/* Author info */}
+              <div>
+                <p className="font-heading font-bold text-foreground">
+                  {testimonial.author}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {testimonial.location} • {testimonial.vehicle}
+                </p>
+              </div>
             </div>
           ))}
         </div>

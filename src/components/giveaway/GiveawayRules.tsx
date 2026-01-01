@@ -33,70 +33,76 @@ export function GiveawayRules() {
     <section className="section-padding bg-background">
       <div className="container-wide">
         <div className="max-w-4xl mx-auto">
-          {/* Header info */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-12">
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-sm">
-              <Calendar className="w-6 h-6 text-primary flex-shrink-0" />
+          {/* Info cards */}
+          <div className="grid sm:grid-cols-3 gap-4 mb-16">
+            <div className="flex items-center gap-4 p-5 bg-muted">
+              <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Calendar className="w-6 h-6 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Giveaway Period</p>
-                <p className="font-semibold text-foreground">Jan 1 - Jan 31, 2026</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Period</p>
+                <p className="font-heading font-bold text-foreground">Jan 1 - 31, 2026</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-sm">
-              <MapPin className="w-6 h-6 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 p-5 bg-muted">
+              <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-6 h-6 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Eligibility</p>
-                <p className="font-semibold text-foreground">US Residents 18+</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Eligibility</p>
+                <p className="font-heading font-bold text-foreground">US Residents 18+</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 bg-muted rounded-sm">
-              <FileText className="w-6 h-6 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 p-5 bg-muted">
+              <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <FileText className="w-6 h-6 text-primary" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Odds of Winning</p>
-                <p className="font-semibold text-foreground">Based on Entries</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Odds</p>
+                <p className="font-heading font-bold text-foreground">Based on Entries</p>
               </div>
             </div>
           </div>
 
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">
-              OFFICIAL RULES & FAQ
+          {/* Section header */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-foreground">
+              RULES & FAQ
             </h2>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          {/* Accordion */}
+          <Accordion type="single" collapsible className="space-y-3">
             {rules.map((rule, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-muted rounded-sm px-6 border-0"
+                className="bg-muted border-0 px-6"
               >
-                <AccordionTrigger className="text-left font-heading font-semibold text-foreground hover:no-underline py-4">
+                <AccordionTrigger className="text-left font-heading font-semibold text-foreground hover:no-underline py-5">
                   {rule.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
+                <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
                   {rule.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
 
-          {/* Legal disclaimer */}
-          <div className="mt-12 p-6 bg-muted rounded-sm border border-border">
+          {/* Disclaimer */}
+          <div className="mt-12 p-6 bg-muted border-l-4 border-primary">
             <div className="flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-muted-foreground flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <div className="text-sm text-muted-foreground">
-                <p className="font-semibold text-foreground mb-2">Legal Disclaimer</p>
+                <p className="font-heading font-semibold text-foreground mb-2">Legal Disclaimer</p>
                 <p className="leading-relaxed">
                   NO PURCHASE NECESSARY TO ENTER OR WIN. A purchase will not improve your chances of winning. 
-                  Void where prohibited by law. This promotion is in no way sponsored, endorsed, administered by, 
-                  or associated with Facebook, Instagram, or any other social media platform. By entering, 
-                  participants agree to release and hold harmless Yankum Ropes LLC and its affiliates from 
-                  any liability arising from participation in this giveaway.
+                  Void where prohibited by law. By entering, participants agree to release and hold harmless 
+                  Yankum Ropes LLC from any liability arising from participation in this giveaway.
                 </p>
-                <p className="mt-4">
-                  For complete official rules, please contact us at{' '}
-                  <a href="mailto:giveaway@yankum.com" className="text-primary hover:underline">
+                <p className="mt-3">
+                  Questions? Contact{' '}
+                  <a href="mailto:giveaway@yankum.com" className="text-primary hover:underline font-medium">
                     giveaway@yankum.com
                   </a>
                 </p>
