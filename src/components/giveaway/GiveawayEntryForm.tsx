@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowRight, Gift, Zap } from 'lucide-react';
+import { ChevronRight, Target } from 'lucide-react';
 
 export function GiveawayEntryForm() {
   const [email, setEmail] = useState('');
@@ -28,60 +28,72 @@ export function GiveawayEntryForm() {
   };
 
   return (
-    <section className="section-padding bg-primary text-primary-foreground relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-40 h-40 border-4 border-primary-foreground rounded-full" />
-        <div className="absolute bottom-10 right-10 w-60 h-60 border-4 border-primary-foreground rounded-full" />
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 border-2 border-primary-foreground rounded-full" />
+    <section className="py-24 md:py-32 bg-yankum-black relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
       </div>
+
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `linear-gradient(hsl(var(--yankum-steel)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--yankum-steel)) 1px, transparent 1px)`,
+        backgroundSize: '60px 60px'
+      }} />
 
       <div className="container-wide relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center gap-4 mb-6">
-            <Gift className="w-10 h-10" />
-            <Zap className="w-10 h-10" />
+          <div className="flex justify-center mb-8">
+            <div className="w-16 h-16 bg-primary/10 border border-primary/30 flex items-center justify-center">
+              <Target className="w-8 h-8 text-primary" />
+            </div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4">
-            DON'T MISS YOUR CHANCE
-          </h2>
-          
-          <p className="text-xl text-primary-foreground/80 mb-8">
-            Enter now and get 100 FREE entries. Share with friends to earn even more!
+          <p className="text-primary font-heading font-semibold uppercase tracking-[0.3em] text-sm mb-4">
+            Don't Miss Out
           </p>
 
-          <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-primary-foreground tracking-tight mb-6">
+            ENTER NOW
+          </h2>
+
+          <div className="w-16 h-1 bg-primary mx-auto mb-8" />
+          
+          <p className="text-xl text-yankum-steel mb-12 max-w-lg mx-auto">
+            Get 100 FREE entries instantly. Share with friends to maximize your chances.
+          </p>
+
+          <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
+            <div className="flex flex-col gap-4 mb-6">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-primary-foreground text-foreground border-0 h-14 text-lg"
+                className="bg-yankum-charcoal border-yankum-steel/30 text-primary-foreground h-16 text-lg rounded-none placeholder:text-yankum-steel focus:border-primary transition-colors text-center"
                 required
               />
+              
+              <Input
+                type="tel"
+                placeholder="Phone Number (Optional)"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-yankum-charcoal border-yankum-steel/30 text-primary-foreground h-16 text-lg rounded-none placeholder:text-yankum-steel focus:border-primary transition-colors text-center"
+              />
+
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-heading font-bold uppercase tracking-wider h-14 px-8"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-heading font-bold uppercase tracking-[0.2em] text-lg h-16 rounded-none transition-all duration-300 hover:translate-y-[-2px]"
               >
-                {isSubmitting ? 'Entering...' : 'Enter Now'}
-                <ArrowRight className="w-5 h-5 ml-2" />
+                {isSubmitting ? 'Processing...' : 'Enter Giveaway'}
+                <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
-            
-            <Input
-              type="tel"
-              placeholder="Phone Number (Optional - for SMS updates)"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="bg-primary-foreground text-foreground border-0 h-14 text-lg mb-4"
-            />
 
-            <p className="text-xs text-primary-foreground/60">
+            <p className="text-xs text-yankum-steel leading-relaxed">
               By entering, you agree to our Terms of Service and Privacy Policy. 
-              We'll never spam you or share your information.
+              We respect your privacy and will never spam you.
             </p>
           </form>
         </div>
