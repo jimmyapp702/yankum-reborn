@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/layout/Layout';
 import { GiveawayHero } from '@/components/giveaway/GiveawayHero';
-import { CountdownTimer } from '@/components/giveaway/CountdownTimer';
 import { FeaturedMultiplierCollection } from '@/components/giveaway/FeaturedMultiplierCollection';
 import { AllProductsSection } from '@/components/giveaway/AllProductsSection';
 
@@ -29,7 +28,6 @@ export default function Giveaway() {
 
       <Layout>
         <GiveawayHero />
-        <CountdownTimer />
         <QuickEntrySection />
         <FeaturedMultiplierCollection />
         <FeaturedRopeSection />

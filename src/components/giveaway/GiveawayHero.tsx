@@ -1,13 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Gift, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function useCountdown() {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 30);
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = endDate.getTime() - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return timeLeft;
+}
+
 export function GiveawayHero() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const timeLeft = useCountdown();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +72,45 @@ export function GiveawayHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/85 to-secondary/75" />
       </div>
 
-      <div className="container-wide relative z-10">
+      {/* Countdown Timer Banner */}
+      <div className="absolute top-0 left-0 right-0 bg-primary/90 backdrop-blur-sm py-3 z-20">
+        <div className="container-wide flex items-center justify-center gap-4 sm:gap-8">
+          <span className="text-xs font-heading uppercase tracking-widest text-primary-foreground/70 hidden sm:block">
+            Ends In
+          </span>
+          <div className="flex items-center gap-3 sm:gap-5">
+            <div className="text-center">
+              <span className="text-xl sm:text-2xl font-heading font-bold tabular-nums text-primary-foreground">
+                {timeLeft.days.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs text-primary-foreground/60 uppercase tracking-wider ml-1">d</span>
+            </div>
+            <span className="text-primary-foreground/30 text-lg">:</span>
+            <div className="text-center">
+              <span className="text-xl sm:text-2xl font-heading font-bold tabular-nums text-primary-foreground">
+                {timeLeft.hours.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs text-primary-foreground/60 uppercase tracking-wider ml-1">h</span>
+            </div>
+            <span className="text-primary-foreground/30 text-lg">:</span>
+            <div className="text-center">
+              <span className="text-xl sm:text-2xl font-heading font-bold tabular-nums text-primary-foreground">
+                {timeLeft.minutes.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs text-primary-foreground/60 uppercase tracking-wider ml-1">m</span>
+            </div>
+            <span className="text-primary-foreground/30 text-lg hidden sm:block">:</span>
+            <div className="text-center hidden sm:block">
+              <span className="text-xl sm:text-2xl font-heading font-bold tabular-nums text-primary-foreground">
+                {timeLeft.seconds.toString().padStart(2, '0')}
+              </span>
+              <span className="text-xs text-primary-foreground/60 uppercase tracking-wider ml-1">s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-wide relative z-10 pt-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Copy */}
           <div>
