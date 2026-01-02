@@ -93,25 +93,6 @@ export function FeaturedMultiplierCollection() {
                         {MULTIPLIER}X
                       </div>
                       
-                      {/* Specs Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-secondary/95 to-secondary/80 backdrop-blur-sm px-4 py-3">
-                        <div className="flex items-center justify-between text-xs">
-                          <div className="flex gap-4">
-                            <div>
-                              <span className="text-secondary-foreground/60 block text-[10px] uppercase tracking-wider">Working Load</span>
-                              <span className="text-secondary-foreground font-heading font-bold">{specs.workingLoad}</span>
-                            </div>
-                            <div>
-                              <span className="text-secondary-foreground/60 block text-[10px] uppercase tracking-wider">Break Strength</span>
-                              <span className="text-secondary-foreground font-heading font-bold">{specs.breakStrength}</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-secondary-foreground/60 text-[10px] uppercase">Made in</span>
-                            <span className="text-lg">🇺🇸</span>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     
                     {/* Product Info */}
