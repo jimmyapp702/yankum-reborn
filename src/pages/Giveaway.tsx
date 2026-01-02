@@ -10,6 +10,7 @@ import { GiveawayEntryForm } from '@/components/giveaway/GiveawayEntryForm';
 import { PreviousWinners } from '@/components/giveaway/PreviousWinners';
 import { QuickEntrySection } from '@/components/giveaway/QuickEntrySection';
 import { FeaturedRopeSection } from '@/components/giveaway/FeaturedRopeSection';
+import { BrandComparisonChart } from '@/components/shared/BrandComparisonChart';
 
 export default function Giveaway() {
   return (
@@ -34,6 +35,7 @@ export default function Giveaway() {
         <PrizeShowcase />
         <PreviousWinners />
         <AllProductsSection />
+        <BrandComparisonChart />
       </Layout>
     </>
   );
