@@ -16,7 +16,7 @@ export function FeaturedRopeSection() {
   const entries = price * multiplier;
 
   return (
-    <section className="py-16 md:py-24 bg-secondary">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Product details */}
@@ -25,30 +25,30 @@ export function FeaturedRopeSection() {
               <span className="bg-primary text-primary-foreground font-heading font-bold text-lg px-3 py-1">
                 {multiplier}X
               </span>
-              <span className="font-heading text-2xl font-bold text-secondary-foreground">
+              <span className="font-heading text-2xl font-bold text-foreground">
                 {entries.toLocaleString()} ENTRIES
               </span>
             </div>
             
-            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-secondary-foreground leading-tight mb-6">
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight mb-6">
               7/8" Kinetic Recovery Rope "Python"
             </h2>
             
-            <p className="text-3xl font-bold text-secondary-foreground mb-2">
+            <p className="text-3xl font-bold text-foreground mb-2">
               ${price}
             </p>
-            <p className="text-secondary-foreground/70 mb-8">
+            <p className="text-muted-foreground mb-8">
               Shipping calculated at checkout
             </p>
 
-            <div className="bg-secondary-foreground/10 rounded-lg p-6 mb-8">
-              <p className="font-heading text-lg font-bold text-secondary-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
+            <div className="bg-muted rounded-lg p-6 mb-8">
+              <p className="font-heading text-lg font-bold text-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
                 Premium Features:
               </p>
               <ul className="space-y-3">
                 {ropeFeatures.map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 text-secondary-foreground">
+                  <li key={index} className="flex items-center gap-3 text-foreground">
                     <Check className="h-5 w-5 text-primary flex-shrink-0" />
                     {item}
                   </li>
@@ -68,7 +68,7 @@ export function FeaturedRopeSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="font-heading font-bold uppercase tracking-wider border-secondary-foreground text-foreground hover:bg-secondary-foreground hover:text-secondary"
+                className="font-heading font-bold uppercase tracking-wider border-foreground text-foreground hover:bg-foreground hover:text-background"
               >
                 <Link to="/products/kinetic-recovery-rope">
                   View Details
@@ -79,7 +79,7 @@ export function FeaturedRopeSection() {
 
           {/* Right - Product Image */}
           <div className="relative">
-            <div className="aspect-square bg-gradient-to-br from-secondary-foreground/10 to-secondary-foreground/5 rounded-lg flex items-center justify-center overflow-hidden p-8">
+            <div className="aspect-square bg-gradient-to-br from-muted to-muted/50 rounded-lg flex items-center justify-center overflow-hidden p-8">
               <img 
                 src={heroRopeImage}
                 alt="7/8 inch Kinetic Recovery Rope Python"
@@ -96,8 +96,8 @@ export function FeaturedRopeSection() {
             </div>
 
             {/* Badge */}
-            <div className="absolute -bottom-4 -right-4 md:bottom-4 md:right-4 bg-secondary border border-secondary-foreground/20 text-secondary-foreground p-4 rounded-lg">
-              <p className="font-heading text-xs uppercase tracking-wider text-secondary-foreground/70">Proudly Made</p>
+            <div className="absolute -bottom-4 -right-4 md:bottom-4 md:right-4 bg-background border border-border text-foreground p-4 rounded-lg">
+              <p className="font-heading text-xs uppercase tracking-wider text-muted-foreground">Proudly Made</p>
               <p className="font-heading font-bold text-sm flex items-center gap-2">
                 In the USA 🇺🇸
               </p>

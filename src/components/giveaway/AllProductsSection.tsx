@@ -9,7 +9,7 @@ export function AllProductsSection() {
   const products = data?.products?.edges || [];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-secondary">
       <div className="container-wide">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
@@ -17,13 +17,13 @@ export function AllProductsSection() {
             <div className="inline-flex items-center gap-2 bg-muted text-muted-foreground px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wider mb-3">
               $1 = 1 Entry
             </div>
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-secondary-foreground">
               All Products
             </h2>
           </div>
           <Link 
             to="/products"
-            className="inline-flex items-center gap-1 text-foreground text-sm font-heading font-semibold hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1 text-secondary-foreground text-sm font-heading font-semibold hover:text-primary transition-colors"
           >
             Shop All <ArrowRight className="w-3 h-3" />
           </Link>
@@ -66,14 +66,14 @@ export function AllProductsSection() {
                     )}
                   </div>
                   <div className="p-3 bg-background">
-                    <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
+                    <h3 className="font-heading font-semibold text-sm text-secondary-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
                       {product.title}
                     </h3>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
                         ${price.toFixed(0)}
                       </span>
-                      <span className="text-foreground font-heading font-semibold">
+                      <span className="text-secondary-foreground font-heading font-semibold">
                         {entries} entries
                       </span>
                     </div>

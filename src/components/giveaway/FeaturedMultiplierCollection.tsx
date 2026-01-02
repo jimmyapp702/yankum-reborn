@@ -28,7 +28,7 @@ export function FeaturedMultiplierCollection() {
   const products = data?.collectionByHandle?.products?.edges || [];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-secondary">
       <div className="container-wide">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
@@ -36,7 +36,7 @@ export function FeaturedMultiplierCollection() {
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-1.5 text-sm font-heading font-bold uppercase tracking-wider mb-4">
               {MULTIPLIER}X Entries
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-foreground">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-secondary-foreground">
               Featured Products
             </h2>
           </div>
@@ -97,7 +97,7 @@ export function FeaturedMultiplierCollection() {
                     
                     {/* Product Info */}
                     <div className="p-4 bg-card">
-                      <h3 className="font-heading font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-3 min-h-[2.5rem]">
+                      <h3 className="font-heading font-bold text-secondary-foreground group-hover:text-primary transition-colors line-clamp-2 mb-3 min-h-[2.5rem]">
                         {product.title}
                       </h3>
                       <div className="flex items-center justify-between">
