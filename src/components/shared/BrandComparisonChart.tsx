@@ -1,4 +1,4 @@
-import { Check, Minus, AlertTriangle, Shield, Wrench, FileCheck, Award, HeadphonesIcon, MapPin } from 'lucide-react';
+import { Check, X, AlertTriangle, Shield, Wrench, FileCheck, Award, HeadphonesIcon, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -98,7 +98,7 @@ function StatusCell({ status, isYankum = false }: { status: FeatureStatus; isYan
   if (status === 'no') {
     return (
       <div className="flex items-center justify-center text-red-500">
-        <Minus className="h-5 w-5" strokeWidth={3} />
+        <X className="h-5 w-5" strokeWidth={3} />
       </div>
     );
   }
@@ -226,7 +226,7 @@ export function BrandComparisonChart() {
             <span>Limited / Inconsistent</span>
           </div>
           <div className="flex items-center gap-2">
-            <Minus className="h-4 w-4 text-red-500" />
+            <X className="h-4 w-4 text-red-500" />
             <span>Not Available</span>
           </div>
           <div className="flex items-center gap-2">
