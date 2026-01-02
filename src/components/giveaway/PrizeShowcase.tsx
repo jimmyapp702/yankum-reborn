@@ -11,7 +11,7 @@ const highlights = [
 
 export function PrizeShowcase() {
   return (
-    <section className="py-20 bg-muted">
+    <section className="py-20 bg-secondary">
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image */}
@@ -21,7 +21,7 @@ export function PrizeShowcase() {
               alt="Custom built off-road vehicle"
               className="w-full aspect-[4/3] object-cover"
             />
-            <div className="absolute bottom-4 left-4 bg-foreground text-background px-4 py-2">
+            <div className="absolute bottom-4 left-4 bg-secondary-foreground text-secondary px-4 py-2">
               <p className="text-xs uppercase tracking-wider opacity-70">Total Value</p>
               <p className="text-xl font-heading font-bold">$75,000+</p>
             </div>
@@ -32,10 +32,10 @@ export function PrizeShowcase() {
             <p className="text-primary font-heading font-bold text-xs uppercase tracking-widest mb-3">
               Grand Prize
             </p>
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-heading font-bold text-secondary-foreground mb-4">
               Fully-Built Off-Road Rig
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-secondary-foreground/70 mb-8">
               A complete, trail-ready vehicle delivered to your door. Turn-key and ready to conquer any terrain.
             </p>
             
@@ -43,7 +43,7 @@ export function PrizeShowcase() {
               {highlights.map((highlight) => (
                 <div key={highlight} className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span className="text-foreground text-sm">{highlight}</span>
+                  <span className="text-secondary-foreground text-sm">{highlight}</span>
                 </div>
               ))}
             </div>

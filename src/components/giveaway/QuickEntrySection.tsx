@@ -33,23 +33,14 @@ const entryPackages = [
 
 export function QuickEntrySection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80"
-          alt="Mountains"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/85 to-secondary/75" />
-      </div>
+    <section className="py-16 md:py-24 bg-background">
 
-      <div className="container-wide relative z-10">
+      <div className="container-wide">
         <div className="text-center mb-12">
-          <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-tight">
+          <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-foreground leading-tight">
             GET ENTERED <span className="text-primary">FAST!</span>
           </h2>
-          <p className="text-white/80 text-lg md:text-xl mt-4 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg md:text-xl mt-4 max-w-2xl mx-auto">
             Skip the shopping and go straight to entries with our Quick Entry packages
           </p>
         </div>

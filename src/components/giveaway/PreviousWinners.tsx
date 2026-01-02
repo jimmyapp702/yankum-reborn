@@ -3,28 +3,19 @@ import { Button } from '@/components/ui/button';
 
 export function PreviousWinners() {
   return (
-    <section className="relative py-16 md:py-24 bg-secondary overflow-hidden">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=2000&q=80"
-          alt="Celebration"
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/70" />
-      </div>
+    <section className="py-16 md:py-24 bg-background">
 
-      <div className="container-wide relative z-10">
+      <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Text content */}
           <div className="text-center lg:text-left">
             <p className="text-primary font-heading text-2xl md:text-3xl font-bold uppercase tracking-wider mb-2">
               Last Year's Giveaway
             </p>
-            <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-[0.85]">
+            <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-foreground leading-[0.85]">
               WINNER
             </h2>
-            <p className="text-white/80 text-lg md:text-xl mt-6 max-w-lg mx-auto lg:mx-0">
+            <p className="text-muted-foreground text-lg md:text-xl mt-6 max-w-lg mx-auto lg:mx-0">
               Watch the incredible moment when our lucky winner received their brand new fully-built off-road rig!
             </p>
             <Button 
