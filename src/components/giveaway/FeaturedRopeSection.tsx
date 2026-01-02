@@ -68,7 +68,7 @@ export function FeaturedRopeSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="font-heading font-bold uppercase tracking-wider border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary"
+                className="font-heading font-bold uppercase tracking-wider border-secondary-foreground text-foreground hover:bg-secondary-foreground hover:text-secondary"
               >
                 <Link to="/products/kinetic-recovery-rope">
                   View Details
