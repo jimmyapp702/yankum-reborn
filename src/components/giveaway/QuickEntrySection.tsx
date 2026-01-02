@@ -61,8 +61,8 @@ export function QuickEntrySection() {
               className={`relative group ${pkg.popular ? 'sm:-mt-4 sm:mb-4' : ''}`}
             >
               {pkg.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider px-4 py-1">
+                <div className="absolute -top-10 right-2 z-10">
+                  <span className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">
                     Best Value
                   </span>
                 </div>
@@ -101,19 +101,6 @@ export function QuickEntrySection() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button 
-            asChild
-            variant="outline"
-            size="lg"
-            className="font-heading font-bold uppercase tracking-wider border-white text-white hover:bg-white hover:text-secondary"
-          >
-            <Link to="/products" className="gap-2">
-              Shop All Products
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </section>
   );
