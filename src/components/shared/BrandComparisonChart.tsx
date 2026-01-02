@@ -81,7 +81,7 @@ const comparisonData: ComparisonRow[] = [
 function StatusCell({ status, isYankum = false }: { status: FeatureStatus; isYankum?: boolean }) {
   if (status === 'yes') {
     return (
-      <div className={`flex items-center justify-center gap-2 ${isYankum ? 'text-primary' : 'text-green-500'}`}>
+      <div className="flex items-center justify-center text-green-500">
         <Check className="h-5 w-5" strokeWidth={3} />
       </div>
     );
@@ -89,7 +89,7 @@ function StatusCell({ status, isYankum = false }: { status: FeatureStatus; isYan
   
   if (status === 'partial') {
     return (
-      <div className="flex items-center justify-center text-muted-foreground/60">
+      <div className="flex items-center justify-center text-yellow-500">
         <AlertTriangle className="h-4 w-4" />
       </div>
     );
@@ -97,20 +97,21 @@ function StatusCell({ status, isYankum = false }: { status: FeatureStatus; isYan
   
   if (status === 'no') {
     return (
-      <div className="flex items-center justify-center text-muted-foreground/40">
-        <Minus className="h-5 w-5" />
+      <div className="flex items-center justify-center text-red-500">
+        <Minus className="h-5 w-5" strokeWidth={3} />
       </div>
     );
   }
   
   if (status === 'varies') {
     return (
-      <span className="text-xs text-muted-foreground/70 uppercase tracking-wide">Varies</span>
+      <span className="text-xs text-secondary-foreground uppercase tracking-wide font-medium">Varies</span>
     );
   }
   
+  // Custom text like "Lifetime" or "Limited"
   return (
-    <span className={`text-sm font-medium ${isYankum ? 'text-primary' : 'text-muted-foreground/70'}`}>
+    <span className={`text-sm font-medium ${isYankum ? 'text-green-500' : 'text-secondary-foreground'}`}>
       {status}
     </span>
   );
@@ -215,21 +216,21 @@ export function BrandComparisonChart() {
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-secondary-foreground/60">
+        <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-secondary-foreground/70">
           <div className="flex items-center gap-2">
             <Check className="h-4 w-4 text-green-500" />
             <span>Confirmed</span>
           </div>
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-muted-foreground/60" />
+            <AlertTriangle className="h-4 w-4 text-yellow-500" />
             <span>Limited / Inconsistent</span>
           </div>
           <div className="flex items-center gap-2">
-            <Minus className="h-4 w-4 text-muted-foreground/40" />
+            <Minus className="h-4 w-4 text-red-500" />
             <span>Not Available</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wide">Varies</span>
+            <span className="text-xs uppercase tracking-wide text-secondary-foreground">Varies</span>
             <span>— Depends on Manufacturer</span>
           </div>
         </div>
