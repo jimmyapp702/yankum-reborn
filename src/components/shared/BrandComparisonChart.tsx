@@ -235,17 +235,6 @@ export function BrandComparisonChart() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12 pt-8 border-t border-secondary-foreground/10">
-          <p className="text-secondary-foreground/70 mb-6 max-w-xl mx-auto">
-            When it matters most, choose recovery gear built for real-world conditions with documented performance and accountability.
-          </p>
-          <Button asChild size="lg" className="font-heading font-bold uppercase tracking-wider">
-            <Link to="/products">
-              Shop Yankum Recovery Gear
-            </Link>
-          </Button>
-        </div>
       </div>
     </section>
   );
