@@ -60,13 +60,6 @@ export function QuickEntrySection() {
               key={pkg.tier}
               className={`relative group ${pkg.popular ? 'sm:-mt-4 sm:mb-4' : ''}`}
             >
-              {pkg.popular && (
-                <div className="absolute -top-10 right-2 z-10">
-                  <span className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">
-                    Best Value
-                  </span>
-                </div>
-              )}
               
               <div className={`relative bg-card/10 backdrop-blur-sm border-2 ${pkg.borderColor} rounded-lg p-6 text-center transition-transform duration-300 hover:-translate-y-2 ${pkg.popular ? 'ring-2 ring-primary' : ''}`}>
                 {/* Entry badge */}
