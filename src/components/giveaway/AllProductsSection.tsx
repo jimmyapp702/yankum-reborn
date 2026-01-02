@@ -66,7 +66,7 @@ export function AllProductsSection() {
                     )}
                   </div>
                   <div className="p-3 bg-background">
-                    <h3 className="font-heading font-semibold text-sm text-secondary-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
+                    <h3 className="font-heading font-semibold text-sm text-black group-hover:text-primary transition-colors line-clamp-1 mb-1">
                       {product.title}
                     </h3>
                     <div className="flex items-center justify-between text-sm">

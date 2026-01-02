@@ -97,7 +97,7 @@ export function FeaturedMultiplierCollection() {
                     
                     {/* Product Info */}
                     <div className="p-4 bg-card">
-                      <h3 className="font-heading font-bold text-secondary-foreground group-hover:text-primary transition-colors line-clamp-2 mb-3 min-h-[2.5rem]">
+                      <h3 className="font-heading font-bold text-black group-hover:text-primary transition-colors line-clamp-2 mb-3 min-h-[2.5rem]">
                         {product.title}
                       </h3>
                       <div className="flex items-center justify-between">
