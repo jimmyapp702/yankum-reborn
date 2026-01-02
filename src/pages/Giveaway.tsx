@@ -10,7 +10,7 @@ import { GiveawayTestimonials } from '@/components/giveaway/GiveawayTestimonials
 import { GiveawayEntryForm } from '@/components/giveaway/GiveawayEntryForm';
 import { PreviousWinners } from '@/components/giveaway/PreviousWinners';
 import { QuickEntrySection } from '@/components/giveaway/QuickEntrySection';
-import { MysteryBagSection } from '@/components/giveaway/MysteryBagSection';
+import { FeaturedRopeSection } from '@/components/giveaway/FeaturedRopeSection';
 
 export default function Giveaway() {
   return (
@@ -32,7 +32,7 @@ export default function Giveaway() {
         <CountdownTimer />
         <QuickEntrySection />
         <FeaturedMultiplierCollection />
-        <MysteryBagSection />
+        <FeaturedRopeSection />
         <PrizeShowcase />
         <PreviousWinners />
         <AllProductsSection />
