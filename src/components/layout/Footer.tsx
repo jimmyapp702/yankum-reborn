@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail } from 'lucide-react';
 import { useCollections } from '@/hooks/useShopify';
 import yankumLogo from '@/assets/yankum-logo.png';
+import { GiveawayRules } from '@/components/giveaway/GiveawayRules';
 
 export function Footer() {
   const { data: collectionsData } = useCollections();
@@ -9,6 +10,7 @@ export function Footer() {
 
   return (
     <footer className="bg-secondary text-secondary-foreground">
+      <GiveawayRules />
       <div className="container-wide section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}

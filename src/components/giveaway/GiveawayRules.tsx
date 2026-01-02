@@ -21,10 +21,10 @@ const faqs = [
 
 export function GiveawayRules() {
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-secondary">
       <div className="container-wide">
         <div className="max-w-xl mx-auto">
-          <h2 className="text-xl font-heading font-bold text-foreground text-center mb-8">
+          <h2 className="text-xl font-heading font-bold text-secondary-foreground text-center mb-8">
             FAQ
           </h2>
 
@@ -33,19 +33,19 @@ export function GiveawayRules() {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-muted border-0 px-4"
+                className="bg-secondary-foreground/10 border-0 px-4"
               >
-                <AccordionTrigger className="text-left font-heading font-semibold text-sm text-foreground hover:no-underline py-4">
+                <AccordionTrigger className="text-left font-heading font-semibold text-sm text-secondary-foreground hover:no-underline py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm pb-4">
+                <AccordionContent className="text-secondary-foreground/70 text-sm pb-4">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
 
-          <p className="text-center text-xs text-muted-foreground mt-8">
+          <p className="text-center text-xs text-secondary-foreground/50 mt-8">
             No purchase necessary. Void where prohibited.
           </p>
         </div>

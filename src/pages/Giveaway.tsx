@@ -4,11 +4,10 @@ import { GiveawayHero } from '@/components/giveaway/GiveawayHero';
 import { CountdownTimer } from '@/components/giveaway/CountdownTimer';
 import { FeaturedMultiplierCollection } from '@/components/giveaway/FeaturedMultiplierCollection';
 import { AllProductsSection } from '@/components/giveaway/AllProductsSection';
-import { HowToEnter } from '@/components/giveaway/HowToEnter';
+
 import { PrizeShowcase } from '@/components/giveaway/PrizeShowcase';
 import { GiveawayTestimonials } from '@/components/giveaway/GiveawayTestimonials';
 import { GiveawayEntryForm } from '@/components/giveaway/GiveawayEntryForm';
-import { GiveawayRules } from '@/components/giveaway/GiveawayRules';
 import { PreviousWinners } from '@/components/giveaway/PreviousWinners';
 import { QuickEntrySection } from '@/components/giveaway/QuickEntrySection';
 import { MysteryBagSection } from '@/components/giveaway/MysteryBagSection';
@@ -34,11 +33,9 @@ export default function Giveaway() {
         <QuickEntrySection />
         <FeaturedMultiplierCollection />
         <MysteryBagSection />
-        <HowToEnter />
         <PrizeShowcase />
         <PreviousWinners />
         <AllProductsSection />
-        <GiveawayRules />
       </Layout>
     </>
   );

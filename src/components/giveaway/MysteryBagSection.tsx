@@ -11,7 +11,7 @@ const bagIncludes = [
 
 export function MysteryBagSection() {
   return (
-    <section className="py-16 md:py-24 bg-muted">
+    <section className="py-16 md:py-24 bg-secondary">
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Product details */}
@@ -20,30 +20,30 @@ export function MysteryBagSection() {
               <span className="bg-primary text-primary-foreground font-heading font-bold text-lg px-3 py-1">
                 40X
               </span>
-              <span className="font-heading text-2xl font-bold text-foreground">
+              <span className="font-heading text-2xl font-bold text-secondary-foreground">
                 4,000 ENTRIES
               </span>
             </div>
             
-            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-foreground leading-tight mb-6">
+            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold text-secondary-foreground leading-tight mb-6">
               Mystery Bag
             </h2>
             
-            <p className="text-3xl font-bold text-foreground mb-2">
+            <p className="text-3xl font-bold text-secondary-foreground mb-2">
               $99.99
             </p>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-secondary-foreground/70 mb-8">
               Shipping calculated at checkout
             </p>
 
-            <div className="bg-background rounded-lg p-6 mb-8">
-              <p className="font-heading text-lg font-bold text-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
+            <div className="bg-secondary-foreground/10 rounded-lg p-6 mb-8">
+              <p className="font-heading text-lg font-bold text-secondary-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
                 <Gift className="h-5 w-5 text-primary" />
                 Every Bag Includes:
               </p>
               <ul className="space-y-3">
                 {bagIncludes.map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 text-foreground">
+                  <li key={index} className="flex items-center gap-3 text-secondary-foreground">
                     <Check className="h-5 w-5 text-primary flex-shrink-0" />
                     {item}
                   </li>
@@ -74,12 +74,12 @@ export function MysteryBagSection() {
 
           {/* Right - Visual */}
           <div className="relative">
-            <div className="aspect-square bg-gradient-to-br from-muted-foreground/10 to-muted-foreground/5 rounded-lg flex items-center justify-center overflow-hidden">
+            <div className="aspect-square bg-gradient-to-br from-secondary-foreground/10 to-secondary-foreground/5 rounded-lg flex items-center justify-center overflow-hidden">
               {/* Decorative pattern background */}
               <div className="absolute inset-0 opacity-10">
                 <div className="grid grid-cols-8 gap-4 p-8 rotate-12 scale-125">
                   {Array.from({ length: 64 }).map((_, i) => (
-                    <Gift key={i} className="h-6 w-6 text-foreground" />
+                    <Gift key={i} className="h-6 w-6 text-secondary-foreground" />
                   ))}
                 </div>
               </div>
@@ -87,7 +87,7 @@ export function MysteryBagSection() {
               {/* Main content */}
               <div className="relative z-10 text-center">
                 <div className="relative inline-block">
-                  <Gift className="h-32 w-32 md:h-48 md:w-48 text-muted-foreground/30" />
+                  <Gift className="h-32 w-32 md:h-48 md:w-48 text-secondary-foreground/30" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="font-heading text-7xl md:text-9xl font-bold text-primary">?</span>
                   </div>
