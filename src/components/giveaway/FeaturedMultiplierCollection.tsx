@@ -11,7 +11,7 @@ export function FeaturedMultiplierCollection() {
   const products = data?.collectionByHandle?.products?.edges || [];
 
   return (
-    <section className="py-20 bg-secondary">
+    <section className="py-20 bg-background">
       <div className="container-wide">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
@@ -19,7 +19,7 @@ export function FeaturedMultiplierCollection() {
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1 text-xs font-heading font-bold uppercase tracking-wider mb-3">
               {MULTIPLIER}X Entries
             </div>
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-secondary-foreground">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-foreground">
               Featured Products
             </h2>
           </div>
