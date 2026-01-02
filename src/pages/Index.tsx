@@ -2,7 +2,7 @@ import { Layout } from '@/components/layout/Layout';
 import { KineticRopesHero } from '@/components/home/KineticRopesHero';
 import { KineticRopeScienceSection } from '@/components/home/KineticRopeScienceSection';
 import { SafetyGuidelinesSection } from '@/components/home/SafetyGuidelinesSection';
-import { ProductEducationSection } from '@/components/home/ProductEducationSection';
+
 import { SizingGuideSection } from '@/components/home/SizingGuideSection';
 import { CompactFeaturedProducts } from '@/components/home/CompactFeaturedProducts';
 import { USAManufacturingSection } from '@/components/home/USAManufacturingSection';
@@ -22,8 +22,6 @@ const Index = () => {
       {/* Education: Safety Do's and Don'ts */}
       <SafetyGuidelinesSection />
       
-      {/* Education: Product Types Explained */}
-      <ProductEducationSection />
       
       {/* Education: Sizing Guide */}
       <SizingGuideSection />
