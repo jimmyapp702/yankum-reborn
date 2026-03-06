@@ -99,11 +99,47 @@ export default function Product() {
   const { data: relatedData } = useFeaturedProducts(4);
   const relatedProducts = relatedData?.products.edges.map(e => e.node).filter(p => p.handle !== handle) || [];
   
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const variants = product?.variants.edges.map(e => e.node) || [];
+
+  // Parse variants into diameter/length options
+  const parsedVariants = useMemo(() => {
+    return variants.map((v, index) => {
+      // Try to split title like '1/2" / 20\'' or '7/8" / 30\''
+      const match = v.title.match(/^(.+?)"\s*\/\s*(\d+)'$/);
+      if (match) {
+        return { diameter: match[1].trim() + '"', length: match[2].trim() + "'", index };
+      }
+      return { diameter: v.title, length: '', index };
+    });
+  }, [variants]);
+
+  const hasSplitOptions = parsedVariants.some(v => v.length !== '');
+  const diameters = useMemo(() => [...new Set(parsedVariants.map(v => v.diameter))], [parsedVariants]);
+  const [selectedDiameter, setSelectedDiameter] = useState(diameters[0] || '');
+  const [selectedLength, setSelectedLength] = useState('');
+
+  // Available lengths for selected diameter
+  const availableLengths = useMemo(() => {
+    return parsedVariants.filter(v => v.diameter === selectedDiameter).map(v => v.length);
+  }, [parsedVariants, selectedDiameter]);
+
+  // Auto-select first length when diameter changes
+  useMemo(() => {
+    if (availableLengths.length > 0 && !availableLengths.includes(selectedLength)) {
+      setSelectedLength(availableLengths[0]);
+    }
+  }, [availableLengths, selectedLength]);
+
+  // Find the matching variant index
+  const selectedVariantIndex = useMemo(() => {
+    if (!hasSplitOptions) return 0;
+    const found = parsedVariants.find(v => v.diameter === selectedDiameter && v.length === selectedLength);
+    return found ? found.index : 0;
+  }, [parsedVariants, selectedDiameter, selectedLength, hasSplitOptions]);
+
   const selectedVariant = variants[selectedVariantIndex];
   const images = product?.images?.edges.map(e => e.node) || [];
   const selectedImage = images[selectedImageIndex] || product?.featuredImage;
