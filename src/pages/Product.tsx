@@ -104,13 +104,13 @@ export default function Product() {
 
   const variants = product?.variants.edges.map(e => e.node) || [];
 
-  // Parse variants into diameter/length options
+  // Parse variants using selectedOptions from Shopify
   const parsedVariants = useMemo(() => {
     return variants.map((v, index) => {
-      // Try to split title like '1/2" / 20\'' or '7/8" / 30\''
-      const match = v.title.match(/^(.+?)"\s*\/\s*(\d+)'$/);
-      if (match) {
-        return { diameter: match[1].trim() + '"', length: match[2].trim() + "'", index };
+      const diameterOpt = v.selectedOptions?.find(o => o.name === 'Diameter');
+      const lengthOpt = v.selectedOptions?.find(o => o.name === 'Length');
+      if (diameterOpt && lengthOpt) {
+        return { diameter: diameterOpt.value, length: lengthOpt.value, index };
       }
       return { diameter: v.title, length: '', index };
     });
@@ -356,10 +356,10 @@ export default function Product() {
                 <div className="space-y-6">
                   {/* Diameter Selector */}
                   <div>
-                    <label className="font-heading font-bold text-lg mb-4 block">
-                      Select Diameter
+                    <label className="font-heading text-base text-muted-foreground mb-3 block">
+                      Diameter
                     </label>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    <div className="flex flex-wrap gap-2">
                       {diameters.map((diameter) => (
                         <button
                           key={diameter}
@@ -367,13 +367,13 @@ export default function Product() {
                             setSelectedDiameter(diameter);
                             setSelectedImageIndex(0);
                           }}
-                          className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                          className={`px-5 py-2.5 rounded-full font-heading text-sm font-bold transition-all ${
                             diameter === selectedDiameter
-                              ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
-                              : 'border-border hover:border-primary/50'
+                              ? 'bg-foreground text-background ring-2 ring-foreground/20 ring-offset-2'
+                              : 'border border-border bg-background text-foreground hover:border-foreground/50'
                           }`}
                         >
-                          <span className="font-bold block">{diameter}</span>
+                          {diameter}
                         </button>
                       ))}
                     </div>
@@ -381,10 +381,10 @@ export default function Product() {
 
                   {/* Length Selector */}
                   <div>
-                    <label className="font-heading font-bold text-lg mb-4 block">
-                      Select Length
+                    <label className="font-heading text-base text-muted-foreground mb-3 block">
+                      Length
                     </label>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    <div className="flex flex-wrap gap-2">
                       {availableLengths.map((length) => {
                         const pv = parsedVariants.find(v => v.diameter === selectedDiameter && v.length === length);
                         const variant = pv ? variants[pv.index] : null;
@@ -396,23 +396,15 @@ export default function Product() {
                               setSelectedImageIndex(0);
                             }}
                             disabled={variant ? !variant.availableForSale : false}
-                            className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                            className={`px-5 py-2.5 rounded-full font-heading text-sm font-bold transition-all ${
                               length === selectedLength
-                                ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                                ? 'bg-foreground text-background ring-2 ring-foreground/20 ring-offset-2'
                                 : variant?.availableForSale !== false
-                                ? 'border-border hover:border-primary/50'
-                                : 'border-border opacity-50 cursor-not-allowed'
+                                ? 'border border-border bg-background text-foreground hover:border-foreground/50'
+                                : 'border border-border opacity-40 cursor-not-allowed'
                             }`}
                           >
-                            <span className="font-bold block">{length}</span>
-                            {variant && (
-                              <span className="text-muted-foreground text-xs">
-                                {formatPrice(variant.price.amount)}
-                              </span>
-                            )}
-                            {variant && !variant.availableForSale && (
-                              <span className="text-destructive text-xs block mt-1">Out of Stock</span>
-                            )}
+                            {length}
                           </button>
                         );
                       })}
