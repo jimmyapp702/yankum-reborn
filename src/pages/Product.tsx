@@ -104,13 +104,33 @@ export default function Product() {
 
   const variants = product?.variants.edges.map(e => e.node) || [];
 
-  // Parse variants using selectedOptions from Shopify
+  // Parse variants using selectedOptions from Shopify (case-insensitive match)
   const parsedVariants = useMemo(() => {
+    if (variants.length > 0) {
+      console.log('Variant selectedOptions sample:', JSON.stringify(variants[0]?.selectedOptions));
+      console.log('Variant title sample:', variants[0]?.title);
+    }
     return variants.map((v, index) => {
-      const diameterOpt = v.selectedOptions?.find(o => o.name === 'Diameter');
-      const lengthOpt = v.selectedOptions?.find(o => o.name === 'Length');
+      // Try selectedOptions first (case-insensitive)
+      const diameterOpt = v.selectedOptions?.find(o => o.name.toLowerCase() === 'diameter');
+      const lengthOpt = v.selectedOptions?.find(o => o.name.toLowerCase() === 'length');
       if (diameterOpt && lengthOpt) {
         return { diameter: diameterOpt.value, length: lengthOpt.value, index };
+      }
+      // Fallback: if there's only one option (like "Title"), try parsing from the title
+      // e.g. "7/8\" / 20'" or "1\" / 30'"
+      const titleMatch = v.title.match(/^(.+?)[""]\s*\/\s*(\d+[''']?)$/);
+      if (titleMatch) {
+        return { diameter: titleMatch[1].trim() + '"', length: titleMatch[2].replace(/['']/, "'"), index };
+      }
+      // Try: "7/8" x 20'" pattern
+      const titleMatch2 = v.title.match(/^(.+?)[""]\s*x\s*(\d+[''']?)$/i);
+      if (titleMatch2) {
+        return { diameter: titleMatch2[1].trim() + '"', length: titleMatch2[2].replace(/['']/, "'"), index };
+      }
+      // If selectedOptions has exactly 2 options, use them as diameter/length
+      if (v.selectedOptions && v.selectedOptions.length >= 2) {
+        return { diameter: v.selectedOptions[0].value, length: v.selectedOptions[1].value, index };
       }
       return { diameter: v.title, length: '', index };
     });
@@ -118,8 +138,15 @@ export default function Product() {
 
   const hasSplitOptions = parsedVariants.some(v => v.length !== '');
   const diameters = useMemo(() => [...new Set(parsedVariants.map(v => v.diameter))], [parsedVariants]);
-  const [selectedDiameter, setSelectedDiameter] = useState(diameters[0] || '');
+  const [selectedDiameter, setSelectedDiameter] = useState('');
   const [selectedLength, setSelectedLength] = useState('');
+
+  // Auto-select first diameter when data loads
+  useMemo(() => {
+    if (diameters.length > 0 && !diameters.includes(selectedDiameter)) {
+      setSelectedDiameter(diameters[0]);
+    }
+  }, [diameters]);
 
   // Available lengths for selected diameter
   const availableLengths = useMemo(() => {
@@ -131,7 +158,7 @@ export default function Product() {
     if (availableLengths.length > 0 && !availableLengths.includes(selectedLength)) {
       setSelectedLength(availableLengths[0]);
     }
-  }, [availableLengths, selectedLength]);
+  }, [availableLengths]);
 
   // Find the matching variant index
   const selectedVariantIndex = useMemo(() => {
