@@ -138,8 +138,15 @@ export default function Product() {
 
   const hasSplitOptions = parsedVariants.some(v => v.length !== '');
   const diameters = useMemo(() => [...new Set(parsedVariants.map(v => v.diameter))], [parsedVariants]);
-  const [selectedDiameter, setSelectedDiameter] = useState(diameters[0] || '');
+  const [selectedDiameter, setSelectedDiameter] = useState('');
   const [selectedLength, setSelectedLength] = useState('');
+
+  // Auto-select first diameter when data loads
+  useMemo(() => {
+    if (diameters.length > 0 && !diameters.includes(selectedDiameter)) {
+      setSelectedDiameter(diameters[0]);
+    }
+  }, [diameters]);
 
   // Available lengths for selected diameter
   const availableLengths = useMemo(() => {
@@ -151,7 +158,7 @@ export default function Product() {
     if (availableLengths.length > 0 && !availableLengths.includes(selectedLength)) {
       setSelectedLength(availableLengths[0]);
     }
-  }, [availableLengths, selectedLength]);
+  }, [availableLengths]);
 
   // Find the matching variant index
   const selectedVariantIndex = useMemo(() => {
