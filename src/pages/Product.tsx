@@ -99,11 +99,47 @@ export default function Product() {
   const { data: relatedData } = useFeaturedProducts(4);
   const relatedProducts = relatedData?.products.edges.map(e => e.node).filter(p => p.handle !== handle) || [];
   
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const variants = product?.variants.edges.map(e => e.node) || [];
+
+  // Parse variants into diameter/length options
+  const parsedVariants = useMemo(() => {
+    return variants.map((v, index) => {
+      // Try to split title like '1/2" / 20\'' or '7/8" / 30\''
+      const match = v.title.match(/^(.+?)"\s*\/\s*(\d+)'$/);
+      if (match) {
+        return { diameter: match[1].trim() + '"', length: match[2].trim() + "'", index };
+      }
+      return { diameter: v.title, length: '', index };
+    });
+  }, [variants]);
+
+  const hasSplitOptions = parsedVariants.some(v => v.length !== '');
+  const diameters = useMemo(() => [...new Set(parsedVariants.map(v => v.diameter))], [parsedVariants]);
+  const [selectedDiameter, setSelectedDiameter] = useState(diameters[0] || '');
+  const [selectedLength, setSelectedLength] = useState('');
+
+  // Available lengths for selected diameter
+  const availableLengths = useMemo(() => {
+    return parsedVariants.filter(v => v.diameter === selectedDiameter).map(v => v.length);
+  }, [parsedVariants, selectedDiameter]);
+
+  // Auto-select first length when diameter changes
+  useMemo(() => {
+    if (availableLengths.length > 0 && !availableLengths.includes(selectedLength)) {
+      setSelectedLength(availableLengths[0]);
+    }
+  }, [availableLengths, selectedLength]);
+
+  // Find the matching variant index
+  const selectedVariantIndex = useMemo(() => {
+    if (!hasSplitOptions) return 0;
+    const found = parsedVariants.find(v => v.diameter === selectedDiameter && v.length === selectedLength);
+    return found ? found.index : 0;
+  }, [parsedVariants, selectedDiameter, selectedLength, hasSplitOptions]);
+
   const selectedVariant = variants[selectedVariantIndex];
   const images = product?.images?.edges.map(e => e.node) || [];
   const selectedImage = images[selectedImageIndex] || product?.featuredImage;
@@ -316,7 +352,74 @@ export default function Product() {
               </div>
 
               {/* Variants */}
-              {variants.length > 1 && (
+              {hasSplitOptions && variants.length > 1 ? (
+                <div className="space-y-6">
+                  {/* Diameter Selector */}
+                  <div>
+                    <label className="font-heading font-bold text-lg mb-4 block">
+                      Select Diameter
+                    </label>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {diameters.map((diameter) => (
+                        <button
+                          key={diameter}
+                          onClick={() => {
+                            setSelectedDiameter(diameter);
+                            setSelectedImageIndex(0);
+                          }}
+                          className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                            diameter === selectedDiameter
+                              ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                        >
+                          <span className="font-bold block">{diameter}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Length Selector */}
+                  <div>
+                    <label className="font-heading font-bold text-lg mb-4 block">
+                      Select Length
+                    </label>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {availableLengths.map((length) => {
+                        const pv = parsedVariants.find(v => v.diameter === selectedDiameter && v.length === length);
+                        const variant = pv ? variants[pv.index] : null;
+                        return (
+                          <button
+                            key={length}
+                            onClick={() => {
+                              setSelectedLength(length);
+                              setSelectedImageIndex(0);
+                            }}
+                            disabled={variant ? !variant.availableForSale : false}
+                            className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                              length === selectedLength
+                                ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                                : variant?.availableForSale !== false
+                                ? 'border-border hover:border-primary/50'
+                                : 'border-border opacity-50 cursor-not-allowed'
+                            }`}
+                          >
+                            <span className="font-bold block">{length}</span>
+                            {variant && (
+                              <span className="text-muted-foreground text-xs">
+                                {formatPrice(variant.price.amount)}
+                              </span>
+                            )}
+                            {variant && !variant.availableForSale && (
+                              <span className="text-destructive text-xs block mt-1">Out of Stock</span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ) : variants.length > 1 && (
                 <div>
                   <label className="font-heading font-bold text-lg mb-4 block">
                     Select Size
@@ -326,7 +429,8 @@ export default function Product() {
                       <button
                         key={variant.id}
                         onClick={() => {
-                          setSelectedVariantIndex(index);
+                          setSelectedDiameter(parsedVariants[index]?.diameter || '');
+                          setSelectedLength(parsedVariants[index]?.length || '');
                           setSelectedImageIndex(0);
                         }}
                         disabled={!variant.availableForSale}
