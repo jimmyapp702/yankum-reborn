@@ -352,7 +352,74 @@ export default function Product() {
               </div>
 
               {/* Variants */}
-              {variants.length > 1 && (
+              {hasSplitOptions && variants.length > 1 ? (
+                <div className="space-y-6">
+                  {/* Diameter Selector */}
+                  <div>
+                    <label className="font-heading font-bold text-lg mb-4 block">
+                      Select Diameter
+                    </label>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {diameters.map((diameter) => (
+                        <button
+                          key={diameter}
+                          onClick={() => {
+                            setSelectedDiameter(diameter);
+                            setSelectedImageIndex(0);
+                          }}
+                          className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                            diameter === selectedDiameter
+                              ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                        >
+                          <span className="font-bold block">{diameter}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Length Selector */}
+                  <div>
+                    <label className="font-heading font-bold text-lg mb-4 block">
+                      Select Length
+                    </label>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {availableLengths.map((length) => {
+                        const pv = parsedVariants.find(v => v.diameter === selectedDiameter && v.length === length);
+                        const variant = pv ? variants[pv.index] : null;
+                        return (
+                          <button
+                            key={length}
+                            onClick={() => {
+                              setSelectedLength(length);
+                              setSelectedImageIndex(0);
+                            }}
+                            disabled={variant ? !variant.availableForSale : false}
+                            className={`p-4 border-2 rounded-sm font-heading text-sm transition-all ${
+                              length === selectedLength
+                                ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                                : variant?.availableForSale !== false
+                                ? 'border-border hover:border-primary/50'
+                                : 'border-border opacity-50 cursor-not-allowed'
+                            }`}
+                          >
+                            <span className="font-bold block">{length}</span>
+                            {variant && (
+                              <span className="text-muted-foreground text-xs">
+                                {formatPrice(variant.price.amount)}
+                              </span>
+                            )}
+                            {variant && !variant.availableForSale && (
+                              <span className="text-destructive text-xs block mt-1">Out of Stock</span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ) : variants.length > 1 && (
                 <div>
                   <label className="font-heading font-bold text-lg mb-4 block">
                     Select Size
@@ -362,7 +429,8 @@ export default function Product() {
                       <button
                         key={variant.id}
                         onClick={() => {
-                          setSelectedVariantIndex(index);
+                          setSelectedDiameter(parsedVariants[index]?.diameter || '');
+                          setSelectedLength(parsedVariants[index]?.length || '');
                           setSelectedImageIndex(0);
                         }}
                         disabled={!variant.availableForSale}
