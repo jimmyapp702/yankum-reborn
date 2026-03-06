@@ -104,13 +104,13 @@ export default function Product() {
 
   const variants = product?.variants.edges.map(e => e.node) || [];
 
-  // Parse variants into diameter/length options
+  // Parse variants using selectedOptions from Shopify
   const parsedVariants = useMemo(() => {
     return variants.map((v, index) => {
-      // Try to split title like '1/2" / 20\'' or '7/8" / 30\''
-      const match = v.title.match(/^(.+?)"\s*\/\s*(\d+)'$/);
-      if (match) {
-        return { diameter: match[1].trim() + '"', length: match[2].trim() + "'", index };
+      const diameterOpt = v.selectedOptions?.find(o => o.name === 'Diameter');
+      const lengthOpt = v.selectedOptions?.find(o => o.name === 'Length');
+      if (diameterOpt && lengthOpt) {
+        return { diameter: diameterOpt.value, length: lengthOpt.value, index };
       }
       return { diameter: v.title, length: '', index };
     });
